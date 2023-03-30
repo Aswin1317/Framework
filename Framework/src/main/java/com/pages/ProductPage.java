@@ -207,6 +207,21 @@ public class ProductPage {
 		return flag;
 	}
 	
+	public boolean isUploadCsvBtnIsDisplayed() {	
+		boolean flag = webaction.checkElementisDisplayed(driver, uploadcsvbtn);	
+		return flag;
+	}
+	
+	public boolean isDownloadCsvBtnIsDisplayed() {	
+		boolean flag = webaction.checkElementisDisplayed(driver, downloadcsvbtn);	
+		return flag;
+	}
+	
+	public boolean isPrintMenuBtnIsDisplayed() {	
+		boolean flag = webaction.checkElementisDisplayed(driver, printmenubtn);	
+		return flag;
+	}
+	
 	public void clickOnAddProduct() {
 		webaction.clickOnTheElement(driver, addproduct);
 	}
@@ -319,17 +334,6 @@ public class ProductPage {
 		webaction.clickOnTheElement(driver, viewproductbtn);	
 	}
 	
-	public void clickOnUploadCsvBtn() {	
-		webaction.clickOnTheElement(driver, uploadcsvbtn);	
-	}
-	
-	public void clickOnDownloadCsvBtn() {	
-		webaction.clickOnTheElement(driver, downloadcsvbtn);	
-	}
-	
-	public void clickOnPrintMenuBtn() {	
-		webaction.clickOnTheElement(driver, printmenubtn);	
-	}
 }
 	
 

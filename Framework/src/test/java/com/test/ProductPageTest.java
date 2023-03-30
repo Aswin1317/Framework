@@ -55,6 +55,9 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(product.isChooseColorsIsDisplayed(), "Failure messege : Choose color is not displayed");
 		soft.assertTrue(product.isCloseButtonIsDisplayed(), "Failure messege : Close button is not displayed");
 		soft.assertTrue(product.isSubmitButtonIsDisplayed(), "Failure messege : Submit button is not displayed");	
+		soft.assertTrue(product.isDownloadCsvBtnIsDisplayed(), "Failure messege : Download CSV button is not displayed");
+		soft.assertTrue(product.isUploadCsvBtnIsDisplayed(), "Failure messege : Upload CSV button is not displayed");
+		soft.assertTrue(product.isPrintMenuBtnIsDisplayed(), "Failure messege : Print Menu button is not displayed");
 		soft.assertAll();
 	}
 		
@@ -81,9 +84,7 @@ public class ProductPageTest extends AutomationBase {
 			product.clickProductDeleteBtn();
 			product.clickProductModifyStockBtn();
 			product.clickViewProductBtn();
-			product.clickOnUploadCsvBtn();
-			product.clickOnDownloadCsvBtn();
-			product.clickOnPrintMenuBtn();
+			
 			
 			SoftAssert soft = new SoftAssert();
 			soft.assertEquals(product.getProductCodeSearch(), "1234");
