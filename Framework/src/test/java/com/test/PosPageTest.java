@@ -1,5 +1,6 @@
 package com.test;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -11,10 +12,12 @@ import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PosPage;
+import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
 public class PosPageTest extends AutomationBase {
 	
+	ExcelUtils excel;
 	WebDriver driver;
 	LoginPage login;
 	HomePage home;
@@ -23,6 +26,7 @@ public class PosPageTest extends AutomationBase {
 	WebbrowserUtils webbrowser = new WebbrowserUtils();
 	@BeforeMethod
 	public void preRun() throws Exception{
+		excel = new ExcelUtils("testdataframe.xlsx");
 		driver=getDriver();
 		login = new LoginPage(driver);
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
@@ -42,9 +46,10 @@ public class PosPageTest extends AutomationBase {
 	}
 	
 	@Test(priority=2, enabled=true)
-	public void enterValueIOnPosPage() {
+	public void validateValueOnPosStore() throws IOException {
 		ppage.clickOnTheStore();
-		ppage.enterValueOnCashInHand("1000");
+		String cashinhand = excel.readStringData("pos", 1, 2);
+		ppage.enterValueOnCashInHand(cashinhand);
 		ppage.clickOnSubmitButton();
 	}
 }

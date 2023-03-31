@@ -227,4 +227,47 @@ WebDriver driver;
 		webaction.enterTheValue(driver, waiteremail, wemail);
 	}
 	
+	public void enterValueInWaiterStore(String wstore) {
+		webaction.enterTheValue(driver, waiterstore, wstore);
+	}
+	
+	public void enterValueInCustomerName(String cname) {
+		webaction.enterTheValue(driver, customername, cname);
+	}
+	
+	public void enterValueInCustomerPhone(String cphone) {
+		webaction.enterTheValue(driver, customerphone, cphone);
+	}
+	
+	public void enterValueInCustomerEmail(String cemail) {
+		webaction.enterTheValue(driver, customeremail, cemail);
+	}
+	
+	public void enterValueInCustomerDsicount(String cdiscount) {
+		webaction.enterTheValue(driver, customerdiscount, cdiscount);
+	}
+	
+	public void enterValueInSupplierName(String sname) {
+		webaction.enterTheValue(driver, suppliername, sname);
+	}
+	
+	public void enterValueInSupplierPhone(String sphone) {
+		webaction.enterTheValue(driver, supplierphone, sphone);
+	}
+	
+	public void enterValueInSupplierEmail(String semail) {
+		webaction.enterTheValue(driver, supplieremail, semail);
+	}
+	
+	public void clickOnWaiterSubmitBtn() {
+		webaction.clickOnTheElement(driver, submitbtn);
+	}
+	
+	public void clickOnCustomerSubmitBtn() {
+		webaction.clickOnTheElement(driver, customersubmitbtn);
+	}
+	
+	public void clickOnSupplierSubmitBtn() {
+		webaction.clickOnTheElement(driver, suppliersubmitbtn);
+	}
 }

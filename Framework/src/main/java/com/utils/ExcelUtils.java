@@ -11,20 +11,18 @@ public class ExcelUtils {
 
 	public static final String currentDir = System.getProperty("user.dir");
 	public static String filePath = currentDir + "/src/test/resources";
-	String file = "testdataframe.xlsx";
+	static String excelPath ; //"testdataframe.xlsx";
 	
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;
 	
-	public ExcelUtils(String fileName, String sheetName) throws IOException {
-		String excelPath = filePath+fileName;
+	public ExcelUtils(String fileName) throws IOException 
+	{
+		excelPath = filePath+fileName;
 		workbook = new XSSFWorkbook(excelPath);
 		sheet = (XSSFSheet) workbook.getSheetAt(0);
-		
 	}
 	
-	
-
 	public static int getRowCount() {
 		int rowCount = 0;
 		try {
@@ -47,11 +45,11 @@ public class ExcelUtils {
 		return colCount;
 	}
 	
-	public static String readStringData(String fileName, String sheetname, int rowNum, int colNum) throws IOException {
+	public static String readStringData(String sheetName, int rowNum, int colNum) throws IOException {
 		
-		String excelPath = filePath+fileName;
+		//String excelPath = filePath+fileName;
 		workbook = new XSSFWorkbook(excelPath);
-		sheet = workbook.getSheet(sheetname);
+		sheet = workbook.getSheet(sheetName);
 		Row row = sheet.getRow(rowNum);
 		Cell c = row.getCell(colNum);
 		

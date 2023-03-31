@@ -11,10 +11,12 @@ import org.testng.internal.PropertyUtils;
 import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
 public class LoginPageTest extends AutomationBase{
 
+	ExcelUtils excel;
 	WebDriver driver;
 	WebbrowserUtils webbrowser;
 	LoginPage login;
@@ -24,6 +26,7 @@ public class LoginPageTest extends AutomationBase{
 	
 	@BeforeMethod
 	public void preRun() throws IOException{
+		excel = new ExcelUtils("testdataframe.xlsx");
 		driver=getDriver();
 		login = new LoginPage(driver);
 		webbrowser = new WebbrowserUtils();
@@ -32,9 +35,11 @@ public class LoginPageTest extends AutomationBase{
 	}
 	
 	@Test(priority=1, enabled=true)
-	public void validateLogin() {
-		login.enterValueToUserName("admin");
-		login.enterValueToPassword("password");
+	public void validateLogin() throws IOException {
+		String uname = excel.readStringData("login", 1, 2);
+		login.enterValueToUserName(uname);
+		String pword = excel.readStringData("login", 2, 2);
+		login.enterValueToPassword(pword);
 		login.clickOnLoginButton();
 	}	
 }

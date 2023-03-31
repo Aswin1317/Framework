@@ -1,5 +1,6 @@
 package com.test;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -11,10 +12,12 @@ import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.StorePage;
+import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
 public class StorePageTest extends AutomationBase {
 
+	ExcelUtils excel;
 	WebDriver driver;
 	LoginPage login;
 	HomePage home;
@@ -25,6 +28,7 @@ public class StorePageTest extends AutomationBase {
 	@BeforeMethod
 	public void preRun() throws Exception
 	{
+		excel = new ExcelUtils("testdataframe.xlsx");
 		driver = getDriver();
 		login = new LoginPage(driver);
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
@@ -54,16 +58,23 @@ public class StorePageTest extends AutomationBase {
 	}
 	
 	@Test(priority=2, enabled=true)
-	public void enterValueToStorePage() {
+	public void enterValueToStorePage() throws IOException {
 		
 		store.clickOnAddStoreButton();
-		store.enterStoreName("Gift Store");
-		store.enterStoreEmail("abcd@gmail.com");
-		store.enterStorePhoneNumber("1234567890");
-		store.enterStoreCountryName("India");
-		store.enterStoreCityName("Abc");
-		store.enterStoreAddress("abcdefgh");
-		store.enterCustomeFooterreceipt("abcd1234");
+		String sname = excel.readStringData("store", 1, 2);
+		store.enterStoreName(sname);
+		String smail = excel.readStringData("store", 2, 2);
+		store.enterStoreEmail(smail);
+		String sphone = excel.readStringData("store", 3, 2);
+		store.enterStorePhoneNumber(sphone);
+		String scountry = excel.readStringData("store", 4, 2);
+		store.enterStoreCountryName(scountry);
+		String scity = excel.readStringData("store", 5, 2);
+		store.enterStoreCityName(scity);
+		String saddress = excel.readStringData("store", 6, 2);
+		store.enterStoreAddress(saddress);
+		String sfooter = excel.readStringData("store", 7, 2);
+		store.enterCustomeFooterreceipt(sfooter);
 		store.clickOnSubmitButton();
 		
 

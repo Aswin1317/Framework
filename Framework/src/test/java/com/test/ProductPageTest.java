@@ -1,5 +1,6 @@
 package com.test;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -11,19 +12,21 @@ import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.ProductPage;
+import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
 public class ProductPageTest extends AutomationBase {
-
+	
+	ExcelUtils excel;
 	WebDriver driver;
 	LoginPage login;
 	HomePage home;
 	ProductPage product;
 	
-	
 	WebbrowserUtils webbrowser = new WebbrowserUtils();
 	@BeforeMethod
 	public void preRun() throws Exception{
+		excel = new ExcelUtils("testdataframe.xlsx");
 		driver=getDriver();
 		login = new LoginPage(driver);
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
@@ -62,23 +65,38 @@ public class ProductPageTest extends AutomationBase {
 	}
 		
 		@Test(priority=2, enabled=true)
-		public void enterValueToProductPage()
+		public void enterValueToProductPage() throws IOException
 		{	
 			product.clickOnAddProduct();
-			product.selectProductType("Standard");
-			product.enterProductCode("1234");
-			product.enterProductName("Apple");
-			product.selectProductcategory("Fruits");
-			product.selectProductSupplier("abc");
-			product.enterProductPurchasePrise("500");
-			product.enterProductTax("10");
-			product.selectProductTaxmethod("exclusive");
-			product.enterProductprice("1000");
-			product.enterProductunit("7");
-			product.enterProductAlertQuantity("7");
-			product.enterProductOptions("more cheese");
-			product.enterProductDescription("abcdefgh");
-			product.chooseProductColors("C1");
+			String ptype = excel.readStringData("product", 1, 2);
+			//System.out.println(ptype);
+			product.selectProductType(ptype);
+			String pcode = excel.readStringData("product", 2, 2);
+			product.enterProductCode(pcode);
+			String pname = excel.readStringData("product", 3, 2);
+			product.enterProductName(pname);
+			String pcategory = excel.readStringData("product", 4, 2);
+			product.selectProductcategory(pcategory);
+			String psupplier = excel.readStringData("product", 5, 2);
+			product.selectProductSupplier(psupplier);
+			String ppurchaseprice = excel.readStringData("product", 6, 2);
+			product.enterProductPurchasePrise(ppurchaseprice);
+			String ptax = excel.readStringData("product", 7, 2);
+			product.enterProductTax(ptax);
+			String ptaxmethod = excel.readStringData("product", 8, 2);
+			product.selectProductTaxmethod(ptaxmethod);
+			String pprice = excel.readStringData("product", 9, 2);
+			product.enterProductprice(pprice);
+			String punit = excel.readStringData("product", 10, 2);
+			product.enterProductunit(punit);
+			String palertquantity = excel.readStringData("product", 11, 2);
+			product.enterProductAlertQuantity(palertquantity);
+			String poptions = excel.readStringData("product", 12, 2);
+			product.enterProductOptions(poptions);
+			String pdescription = excel.readStringData("product", 13, 2);
+			product.enterProductDescription(pdescription);
+			String pcolor = excel.readStringData("product", 14, 2);
+			product.chooseProductColors(pcolor);
 			product.clickOnSubmitBtn();
 			product.clickProductEditBtn();
 			product.clickProductDeleteBtn();

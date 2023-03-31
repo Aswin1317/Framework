@@ -4,13 +4,13 @@
   <test name="Test">
   <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <!-- <class name="com.test.LoginPageTest"/>-->
-  <!--   <class name="com.test.HomePageTest"/> -->
-  <!--  <class name="com.test.PosPageTest"/>  -->
-  <!--    <class name="com.test.ProductPageTest"/>  -->
+    <!--   <class name="com.test.LoginPageTest"/>-->
+   <!--    <class name="com.test.HomePageTest"/> -->
+    <class name="com.test.PosPageTest"/>  
+ <!-- <class name="com.test.ProductPageTest"/>  -->
  <!--  <class name="com.test.StorePageTest"/>  -->
-      <class name="com.test.PeoplePageTest"/>
-  <!-- <class name="com.test.LogoutButtonTest"/>  -->
+  <!--      <class name="com.test.PeoplePageTest"/> -->
+  <!--  <class name="com.test.LogoutButtonTest"/>  -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
