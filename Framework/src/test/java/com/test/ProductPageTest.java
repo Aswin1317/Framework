@@ -98,8 +98,6 @@ public class ProductPageTest extends AutomationBase {
 			String pcolor = excel.readStringData("product", 14, 2);
 			product.chooseProductColors(pcolor);
 			product.clickOnSubmitBtn();
-			product.clickProductEditBtn();
-			product.clickProductDeleteBtn();
 			product.clickProductModifyStockBtn();
 			product.clickViewProductBtn();
 			
@@ -113,5 +111,47 @@ public class ProductPageTest extends AutomationBase {
 			soft.assertEquals(product.getProductPriceSearch(), "1000");
 			soft.assertEquals(product.getProductDescriptionSearch(), "abcdefgh");
 		}
+		
+		@Test(priority=3, enabled=true)
+		public void validateToEditProductInProductPage() throws IOException
+		{
+			product.clickProductEditBtn();
+			String etype = excel.readStringData("product", 19, 2);
+			product.selectProductType(etype);
+			String ecode = excel.readStringData("product", 20, 2);
+			product.enterProductCode(ecode);
+			String ename = excel.readStringData("product", 21, 2);
+			product.enterProductName(ename);
+			String ecategory = excel.readStringData("product", 22, 2);
+			product.selectProductcategory(ecategory);
+			String esupplier = excel.readStringData("product", 23, 2);
+			product.selectProductSupplier(esupplier);
+			String epurchaseprice = excel.readStringData("product", 24, 2);
+			product.enterProductPurchasePrise(epurchaseprice);
+			String etax = excel.readStringData("product", 25, 2);
+			product.enterProductTax(etax);
+			String etaxmethod = excel.readStringData("product", 26, 2);
+			product.selectProductTaxmethod(etaxmethod);
+			String eprice = excel.readStringData("product", 27, 2);
+			product.enterProductprice(eprice);
+			String eunit = excel.readStringData("product", 28, 2);
+			product.enterProductunit(eunit);
+			String ealert = excel.readStringData("product", 29, 2);
+			product.enterProductAlertQuantity(ealert);
+			String eoption = excel.readStringData("product", 30, 2);
+			product.enterProductOptions(eoption);
+			String edescription = excel.readStringData("product", 31, 2);
+			product.enterProductDescription(edescription);
+			String ecolor = excel.readStringData("product", 32, 2);
+			product.chooseProductColors(ecolor);
+		}
 
+		@Test(priority=4, enabled=true)
+		public void validateToDeleteTheProductInProductPage()
+		{
+			product.clickProductDeleteBtn();
+			product.clickProductConfirmDeleteBtn();
+		}
+		
+		
 }

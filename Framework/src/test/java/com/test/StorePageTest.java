@@ -58,8 +58,8 @@ public class StorePageTest extends AutomationBase {
 	}
 	
 	@Test(priority=2, enabled=true)
-	public void enterValueToStorePage() throws IOException {
-		
+	public void validationToEnterValueToStorePage() throws IOException 
+	{	
 		store.clickOnAddStoreButton();
 		String sname = excel.readStringData("store", 1, 2);
 		store.enterStoreName(sname);
@@ -76,7 +76,25 @@ public class StorePageTest extends AutomationBase {
 		String sfooter = excel.readStringData("store", 7, 2);
 		store.enterCustomeFooterreceipt(sfooter);
 		store.clickOnSubmitButton();
-		
-
+	}
+	
+	@Test
+	public void validateElementIsDisplayedOnEditBtnInStorePage()
+	{
+		store.clickOnEditStoreButton();
+		SoftAssert soft = new SoftAssert();
+		soft.assertTrue(store.isAddStoreIsDisplayed(), "Failure messege : Add store is not displayed");
+		soft.assertTrue(store.isStoreNameIsDisplayed(), "Failure messege  : Store name is not displayed");
+		soft.assertTrue(store.isStoreEmailIsDisplayed(), "Failure mesege : Store email is not displayed");
+		soft.assertTrue(store.isStorePhoneIsDisplayed(), "Failure messege : Store phone number is not displayed");
+		soft.assertTrue(store.isStoreCountryIsDisplayed(), "Failure messege : Store country is not displayed");
+		soft.assertTrue(store.isStoreCityIsDisplayed(), "Failure messege : Store city is not displayed");
+		soft.assertTrue(store.isStoreAddressIsDisplayed(), "Failure messege : Store address is not displayed");
+		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(), "Failure messege : Store customer footer receipt is not displayed");
+	}
+	
+	public void validationToDeleteTheStoreInStorePage()
+	{
+		store.clickOnDeleteStoreButton();
 	}
 }

@@ -11,12 +11,10 @@ import org.testng.internal.PropertyUtils;
 import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
-import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
-public class LoginPageTest extends AutomationBase{
-
-	ExcelUtils excel;
+public class LoginPageTest extends AutomationBase
+{
 	WebDriver driver;
 	WebbrowserUtils webbrowser;
 	LoginPage login;
@@ -25,21 +23,21 @@ public class LoginPageTest extends AutomationBase{
 	Properties prop;
 	
 	@BeforeMethod
-	public void preRun() throws IOException{
-		excel = new ExcelUtils("testdataframe.xlsx");
+	public void preRun() throws IOException
+	{
 		driver=getDriver();
 		login = new LoginPage(driver);
 		webbrowser = new WebbrowserUtils();
 		home = new HomePage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
+		//prop = propertyutil
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
 	}
 	
 	@Test(priority=1, enabled=true)
-	public void validateLogin() throws IOException {
-		String uname = excel.readStringData("login", 1, 2);
-		login.enterValueToUserName(uname);
-		String pword = excel.readStringData("login", 2, 2);
-		login.enterValueToPassword(pword);
+	public void validateLogin() throws IOException 
+	{
+		login.enterValueToUserName("username");
+		login.enterValueToPassword("password");
 		login.clickOnLoginButton();
 	}	
 }

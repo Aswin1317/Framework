@@ -112,6 +112,12 @@ public class ProductPage {
 	@FindBy(xpath="//a[text()='PrintMenu']")
 	WebElement printmenubtn;
 	
+	@FindBy(xpath="(//a[@class='btn btn-default'])[1]")
+	WebElement deleteproductbtn;
+	
+	@FindBy(xpath="//a[text()='Yes, delete it!']")
+	WebElement deleteitbtn;
+	
 	public ProductPage(WebDriver  driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
@@ -324,6 +330,10 @@ public class ProductPage {
 	
 	public void clickProductDeleteBtn() {	
 		webaction.clickOnTheElement(driver, product_deletebtn);	
+	}
+	
+	public void clickProductConfirmDeleteBtn() {
+		webaction.clickOnTheElement(driver, deleteitbtn);
 	}
 	
 	public void clickProductModifyStockBtn() {	
