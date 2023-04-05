@@ -79,18 +79,24 @@ public class StorePageTest extends AutomationBase {
 	}
 	
 	@Test
-	public void validateElementIsDisplayedOnEditBtnInStorePage()
+	public void validateT0EditStoreInStorePage() throws IOException
 	{
 		store.clickOnEditStoreButton();
-		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(store.isAddStoreIsDisplayed(), "Failure messege : Add store is not displayed");
-		soft.assertTrue(store.isStoreNameIsDisplayed(), "Failure messege  : Store name is not displayed");
-		soft.assertTrue(store.isStoreEmailIsDisplayed(), "Failure mesege : Store email is not displayed");
-		soft.assertTrue(store.isStorePhoneIsDisplayed(), "Failure messege : Store phone number is not displayed");
-		soft.assertTrue(store.isStoreCountryIsDisplayed(), "Failure messege : Store country is not displayed");
-		soft.assertTrue(store.isStoreCityIsDisplayed(), "Failure messege : Store city is not displayed");
-		soft.assertTrue(store.isStoreAddressIsDisplayed(), "Failure messege : Store address is not displayed");
-		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(), "Failure messege : Store customer footer receipt is not displayed");
+		String ename = excel.readStringData("store", 12, 2);
+		store.enterStoreName(ename);
+		String email = excel.readStringData("store", 13, 2);
+		store.enterStoreEmail(email);
+		String enumber = excel.readStringData("store", 14, 2);
+		store.enterStorePhoneNumber(enumber);
+		String ecountry = excel.readStringData("store", 15, 2);
+		store.enterStoreCountryName(ecountry);
+		String ecity = excel.readStringData("store", 16, 2);
+		store.enterStoreCityName(ecity);
+		String eaddress = excel.readStringData("store", 17, 2);
+		store.enterStoreAddress(eaddress);
+		String efooter = excel.readStringData("store", 18, 2);
+		store.enterCustomeFooterreceipt(efooter);
+		store.clickOnSubmitButton();
 	}
 	
 	public void validationToDeleteTheStoreInStorePage()

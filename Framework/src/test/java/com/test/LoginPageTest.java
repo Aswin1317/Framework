@@ -29,7 +29,8 @@ public class LoginPageTest extends AutomationBase
 		login = new LoginPage(driver);
 		webbrowser = new WebbrowserUtils();
 		home = new HomePage(driver);
-		//prop = propertyutil
+		propertyutil = new PropertyUtils();
+		//prop = propertyutil.
 		webbrowser.launchUrl(driver, prop.getProperty("url"));
 	}
 	

@@ -90,7 +90,7 @@ public class PeoplePageTest extends AutomationBase{
 	}
 	
 	@Test(priority=3, enabled=true)
-	public void validateValueInAddWaiter() throws IOException {
+	public void validateToEnterValueInAddWaiter() throws IOException {
 		String wname = excel.readStringData("people", 1, 2);
 		people.enterValueInWaiterName(wname);
 		String wphone = excel.readStringData("people", 2, 2);
