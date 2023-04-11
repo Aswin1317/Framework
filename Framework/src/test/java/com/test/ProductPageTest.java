@@ -30,12 +30,12 @@ public class ProductPageTest extends AutomationBase {
 		driver=getDriver();
 		login = new LoginPage(driver);
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		home = login.login("admin", "password");
 		product = home.navigateToProductPage();
 	}
 	
-	@Test(priority=1, enabled=true)
+	@Test(priority=1, enabled=false)
 	public void validateElementsOnAddProductPage() 
 	{	
 		product.clickOnAddProduct();

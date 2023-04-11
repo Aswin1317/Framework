@@ -1,27 +1,24 @@
 package com.test;
 
-import java.io.IOException;
-import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.pages.CategoryPage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
-import com.pages.PosPage;
 import com.utils.ExcelUtils;
 import com.utils.WebbrowserUtils;
 
-public class PosPageTest extends AutomationBase {
-	
+public class CategoryPageTest extends AutomationBase{
+
 	ExcelUtils excel;
 	WebDriver driver;
 	LoginPage login;
 	HomePage home;
-	PosPage ppage;
+	CategoryPage category;
 	
 	WebbrowserUtils webbrowser = new WebbrowserUtils();
 	@BeforeMethod
@@ -32,23 +29,19 @@ public class PosPageTest extends AutomationBase {
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		home = login.login("admin", "password");
-		ppage = home.navigateToPosPage();
+		category = home.navigateToCategoryPage();
 	}
 	
 	@Test(priority=1, enabled=true)
-	public void validateMenuIsDisplayedOnPosPage() {	
-		ppage.clickOnTheStore();
+	public void validateMenuIsDisplayedOnCategoryPage() {
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(ppage.isCashinHandisDisplayed(), "Failure messege : Cash in hand is not displayed");
-		soft.assertTrue(ppage.isCloseButtonIsDisplayed(), "Failure messege : Close button is not displayed");
-		soft.assertTrue(ppage.isSubmitButtonIsDisplayed(), "Failure messege : Submit button is not displayed");	
+		soft.assertTrue(category.isCategoryProductIsDisplayed(), "Failure messege : Category Product is not displayed");
+		soft.assertTrue(category.isCategoryExpenseIsDisplayed(), "Failure messege : Category Expense is not displayed");
 	}
 	
-	@Test(priority=2, enabled=true)
-	public void validateValueOnPosStore() throws IOException {
-		ppage.clickOnTheStore();
-		String cashinhand = excel.readStringData("pos", 1, 2);
-		ppage.enterValueOnCashInHand(cashinhand);
-		ppage.clickOnSubmitButton();
+	@Test(priority=1, enabled=true)
+	public void validateToAccessMenusInCategoryPage() {
+		category.clickOnCategoryProduct();
+		category.clickOnCategoryExpense();
 	}
 }

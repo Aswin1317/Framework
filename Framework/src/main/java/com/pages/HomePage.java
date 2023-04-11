@@ -170,10 +170,19 @@ public class HomePage {
 		navigateToPeopleLink();
 		return new PeoplePage(driver);
 	}
+	
+	public ExpensePage navigateToExpensePage() {
+		navigateToExpenseLink();
+		return new ExpensePage(driver);
+	}
+	
+	public CategoryPage navigateToCategoryPage() {
+		navigateToCategoriesLink();
+		return new CategoryPage(driver);
+	}
 
 	public LogoutButton navigateToLogoutBtn() {
 		navigateToLogoutButton();
 		return null;
-		
 	}
 }

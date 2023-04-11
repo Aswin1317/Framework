@@ -45,7 +45,7 @@ public class ExcelUtils {
 		return colCount;
 	}
 	
-	public static String readStringData(String sheetName, int rowNum, int colNum) throws IOException {
+	public  String readStringData(String sheetName, int rowNum, int colNum) throws IOException {
 		
 		//String excelPath = filePath+fileName;
 		workbook = new XSSFWorkbook(excelPath);
@@ -56,7 +56,7 @@ public class ExcelUtils {
 		return c.getStringCellValue();
 	}
 	
-	public static int readIntegerData(String fileName, int rowNum, int colNum, String sheetname) throws IOException {
+	public  int readIntegerData(String fileName, int rowNum, int colNum, String sheetname) throws IOException {
 		
 		String excelPath = filePath+fileName;
 		workbook = new XSSFWorkbook(excelPath);
