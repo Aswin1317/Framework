@@ -36,11 +36,11 @@ public class AutomationBase {
 	public void launchBrowser(String browserName) throws Exception {
 		switch (browserName) {
 		case "chrome":
-			launchChromeBrowser();
+		launchChromeBrowser();
 			break;
 
 		case "edge":
-			launchEdgeBrowser();
+				launchEdgeBrowser();
 			break;
 
 		case "firefox":
