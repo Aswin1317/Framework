@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test thread-count="9" name="Test" parallel="tests">
+		<parameter name="browserName" value="Chrome"></parameter>
+
+		<classes>
+			<class name="com.test.CategoryPageTest" />
+			<class name="com.test.ExpensePageTest" />
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.LoginPageTest" />
+			<class name="com.test.LogoutButtonTest" />
+			<class name="com.test.PeoplePageTest" />
+			<class name="com.test.PosPageTest" />
+			<class name="com.test.ProductPageTest" />
+			<class name="com.test.StorePageTest" />
+		</classes>
+	</test>
+	<test thread-count="9" name="Test" parallel="tests">
+		<parameter name="browserName" value="Edge"></parameter>
+
+		<classes>
+			<class name="com.test.CategoryPageTest" />
+			<class name="com.test.ExpensePageTest" />
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.LoginPageTest" />
+			<class name="com.test.LogoutButtonTest" />
+			<class name="com.test.PeoplePageTest" />
+			<class name="com.test.PosPageTest" />
+			<class name="com.test.ProductPageTest" />
+			<class name="com.test.StorePageTest" />
+		</classes>
+	</test>
+
+	<test thread-count="9" name="Test" parallel="tests">
+		<parameter name="browserName" value="Firefox"></parameter>
+
+		<classes>
+			<class name="com.test.CategoryPageTest" />
+			<class name="com.test.ExpensePageTest" />
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.LoginPageTest" />
+			<class name="com.test.LogoutButtonTest" />
+			<class name="com.test.PeoplePageTest" />
+			<class name="com.test.PosPageTest" />
+			<class name="com.test.ProductPageTest" />
+			<class name="com.test.StorePageTest" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
+  

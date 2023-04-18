@@ -1,6 +1,7 @@
 package com.test;
 
-import java.time.Duration;
+import java.io.IOException;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -10,27 +11,29 @@ import org.testng.asserts.SoftAssert;
 import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class HomePageTest extends AutomationBase{
+public class HomePageTest extends AutomationBase {
 
 	WebDriver driver;
+	WebbrowserUtils webbrowser;
 	LoginPage login;
 	HomePage home;
-	
-	WebbrowserUtils webbrowser = new WebbrowserUtils();
+	Properties prop;
+	PropertyUtils propertyutil;
+
 	@BeforeMethod
 	public void preRun() throws Exception {
-		driver=getDriver();
+		driver = getDriver();
 		login = new LoginPage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-		home = login.login("admin", "password");
+		prop = propertyutil.getProperty("config.properties");
+		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
 	}
-	
-	@Test(priority=1, enabled=true)
-	public void validateMenuIsDisplayyedOnHomePage() 
-	{
+
+	@Test(priority = 1, enabled = true)
+	public void validateMenuIsDisplayyedOnHomePage() throws IOException {
+
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(home.isPosLinkIsDisplayed(), "Failure messege : Pos link is not displayed");
 		soft.assertTrue(home.isProductLinkIsDisplayed(), "Failure messege : Product link is not displayed");
@@ -44,8 +47,8 @@ public class HomePageTest extends AutomationBase{
 		home.isLanguageIsDisplayed();
 		home.isLogoutButtonIsDisplayed();
 	}
-	
-	@Test(priority=2, enabled=true)
+
+	@Test(priority = 2, enabled = true)
 	public void validateTheMenuIsClickableOnHomePage() {
 		home.navigateToPosLink();
 		home.navigateToProductLink();
@@ -57,6 +60,6 @@ public class HomePageTest extends AutomationBase{
 		home.navigateToSettingLink();
 		home.navigateToReportsLink();
 		home.navigateToLanguage();
-		//home.navigateToLogoutButton();
+		home.navigateToLogoutButton();
 	}
 }

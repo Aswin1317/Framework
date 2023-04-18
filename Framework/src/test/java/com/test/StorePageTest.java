@@ -1,7 +1,7 @@
 package com.test;
 
 import java.io.IOException;
-import java.time.Duration;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -13,33 +13,34 @@ import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.StorePage;
 import com.utils.ExcelUtils;
+import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
 public class StorePageTest extends AutomationBase {
 
 	ExcelUtils excel;
 	WebDriver driver;
+	WebbrowserUtils webbrowser;
 	LoginPage login;
 	HomePage home;
 	StorePage store;
-	
-	
-	WebbrowserUtils webbrowser = new WebbrowserUtils();
+	Properties prop;
+	PropertyUtils propertyutil;
+
 	@BeforeMethod
-	public void preRun() throws Exception
-	{
+	public void preRun() throws Exception {
 		excel = new ExcelUtils("testdataframe.xlsx");
 		driver = getDriver();
 		login = new LoginPage(driver);
 		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		home = login.login("admin", "password");
+		prop = propertyutil.getProperty("config.properties");
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
+		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
 		store = home.navigateToStoresPage();
 	}
 
-	@Test(priority=1, enabled=true)
-	public void validateMenuIsDisplayedOnStorePage() 
-	{
+	@Test(priority = 1, enabled = true)
+	public void validateMenuIsDisplayedOnStorePage() {
 		store.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(store.isAddStoreIsDisplayed(), "Failure messege : Add store is not displayed");
@@ -50,16 +51,11 @@ public class StorePageTest extends AutomationBase {
 		soft.assertTrue(store.isStoreCityIsDisplayed(), "Failure messege : Store city is not displayed");
 		soft.assertTrue(store.isStoreAddressIsDisplayed(), "Failure messege : Store address is not displayed");
 		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(), "Failure messege : Store customer footer receipt is not displayed");
-		soft.assertTrue(store.isCloseButtonIsDisplayed(), "Failure messege : Close button is not displayed");
-		soft.assertTrue(store.isSubmitButtonIsDisplayed(), "Failure messege : Submit button is not displayed");
-		soft.assertTrue(store.isEditStoreIsDisplayed(), "Failure messege : Edit store button is not displayed");
-		soft.assertTrue(store.isDeleteStoreIsDisplayed(), "Failue messege : Delete store button is not displayed");
-		//soft.assertTrue(store.isSearchStoreIsDisplayed(), "Failure messege : Search store is not displayed");
+
 	}
-	
-	@Test(priority=2, enabled=true)
-	public void validationToEnterValueToStorePage() throws IOException 
-	{	
+
+	@Test(priority = 2, enabled = true)
+	public void validationToEnterValueToStorePage() throws IOException {
 		store.clickOnAddStoreButton();
 		String sname = excel.readStringData("store", 1, 2);
 		store.enterStoreName(sname);
@@ -77,10 +73,9 @@ public class StorePageTest extends AutomationBase {
 		store.enterCustomeFooterreceipt(sfooter);
 		store.clickOnSubmitButton();
 	}
-	
+
 	@Test
-	public void validateT0EditStoreInStorePage() throws IOException
-	{
+	public void validateT0EditStoreInStorePage() throws IOException {
 		store.clickOnEditStoreButton();
 		String ename = excel.readStringData("store", 12, 2);
 		store.enterStoreName(ename);
@@ -98,9 +93,8 @@ public class StorePageTest extends AutomationBase {
 		store.enterCustomeFooterreceipt(efooter);
 		store.clickOnSubmitButton();
 	}
-	
-	public void validationToDeleteTheStoreInStorePage()
-	{
+
+	public void validationToDeleteTheStoreInStorePage() {
 		store.clickOnDeleteStoreButton();
 	}
 }

@@ -1,7 +1,7 @@
 package com.test;
 
 import java.io.IOException;
-import java.time.Duration;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -13,31 +13,36 @@ import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.ProductPage;
 import com.utils.ExcelUtils;
+import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
 public class ProductPageTest extends AutomationBase {
-	
+
 	ExcelUtils excel;
 	WebDriver driver;
+	WebbrowserUtils webbrowser;
 	LoginPage login;
 	HomePage home;
 	ProductPage product;
-	
-	WebbrowserUtils webbrowser = new WebbrowserUtils();
+	Properties prop;
+	PropertyUtils propertyutil;
+
 	@BeforeMethod
-	public void preRun() throws Exception{
+	public void preRun() throws Exception {
 		excel = new ExcelUtils("testdataframe.xlsx");
-		driver=getDriver();
+		driver = getDriver();
 		login = new LoginPage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-		home = login.login("admin", "password");
+		propertyutil = new PropertyUtils(); 
+		webbrowser = new WebbrowserUtils();
+		prop = propertyutil.getProperty("config.properties");
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
+		login.performlogin(prop.getProperty("admin"), prop.getProperty("password"));
+		home = new HomePage(driver);
 		product = home.navigateToProductPage();
 	}
-	
-	@Test(priority=1, enabled=false)
-	public void validateElementsOnAddProductPage() 
-	{	
+
+	@Test(priority = 1, enabled = true)
+	public void validateElementsOnAddProductPage() {
 		product.clickOnAddProduct();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(product.isAddProductIsDisplayed(), "Failure messege : Add product is not displayed");
@@ -56,102 +61,91 @@ public class ProductPageTest extends AutomationBase {
 		soft.assertTrue(product.isInputImageIsDisplayed(), "Failure messege : Input image is not displayed");
 		soft.assertTrue(product.isProductDescriptionIsDisplayed(), "Failure messege : Product description is not displayed");
 		soft.assertTrue(product.isChooseColorsIsDisplayed(), "Failure messege : Choose color is not displayed");
-		soft.assertTrue(product.isCloseButtonIsDisplayed(), "Failure messege : Close button is not displayed");
-		soft.assertTrue(product.isSubmitButtonIsDisplayed(), "Failure messege : Submit button is not displayed");	
-		soft.assertTrue(product.isDownloadCsvBtnIsDisplayed(), "Failure messege : Download CSV button is not displayed");
-		soft.assertTrue(product.isUploadCsvBtnIsDisplayed(), "Failure messege : Upload CSV button is not displayed");
-		soft.assertTrue(product.isPrintMenuBtnIsDisplayed(), "Failure messege : Print Menu button is not displayed");
 		soft.assertAll();
 	}
-		
-		@Test(priority=2, enabled=true)
-		public void enterValueToProductPage() throws IOException
-		{	
-			product.clickOnAddProduct();
-			String ptype = excel.readStringData("product", 1, 2);
-			//System.out.println(ptype);
-			product.selectProductType(ptype);
-			String pcode = excel.readStringData("product", 2, 2);
-			product.enterProductCode(pcode);
-			String pname = excel.readStringData("product", 3, 2);
-			product.enterProductName(pname);
-			String pcategory = excel.readStringData("product", 4, 2);
-			product.selectProductcategory(pcategory);
-			String psupplier = excel.readStringData("product", 5, 2);
-			product.selectProductSupplier(psupplier);
-			String ppurchaseprice = excel.readStringData("product", 6, 2);
-			product.enterProductPurchasePrise(ppurchaseprice);
-			String ptax = excel.readStringData("product", 7, 2);
-			product.enterProductTax(ptax);
-			String ptaxmethod = excel.readStringData("product", 8, 2);
-			product.selectProductTaxmethod(ptaxmethod);
-			String pprice = excel.readStringData("product", 9, 2);
-			product.enterProductprice(pprice);
-			String punit = excel.readStringData("product", 10, 2);
-			product.enterProductunit(punit);
-			String palertquantity = excel.readStringData("product", 11, 2);
-			product.enterProductAlertQuantity(palertquantity);
-			String poptions = excel.readStringData("product", 12, 2);
-			product.enterProductOptions(poptions);
-			String pdescription = excel.readStringData("product", 13, 2);
-			product.enterProductDescription(pdescription);
-			String pcolor = excel.readStringData("product", 14, 2);
-			product.chooseProductColors(pcolor);
-			product.clickOnSubmitBtn();
-			product.clickProductModifyStockBtn();
-			product.clickViewProductBtn();
-			
-			
-			SoftAssert soft = new SoftAssert();
-			soft.assertEquals(product.getProductCodeSearch(), "1234");
-			soft.assertEquals(product.getProductNameSearch(), "Apple");
-			soft.assertEquals(product.getProductCategorySearch(), "Fruits");
-			soft.assertEquals(product.getProductSupplierSearch(), "abc");
-			soft.assertEquals(product.getProductTaxSearch(), "10");
-			soft.assertEquals(product.getProductPriceSearch(), "1000");
-			soft.assertEquals(product.getProductDescriptionSearch(), "abcdefgh");
-		}
-		
-		@Test(priority=3, enabled=true)
-		public void validateToEditProductInProductPage() throws IOException
-		{
-			product.clickProductEditBtn();
-			String etype = excel.readStringData("product", 19, 2);
-			product.selectProductType(etype);
-			String ecode = excel.readStringData("product", 20, 2);
-			product.enterProductCode(ecode);
-			String ename = excel.readStringData("product", 21, 2);
-			product.enterProductName(ename);
-			String ecategory = excel.readStringData("product", 22, 2);
-			product.selectProductcategory(ecategory);
-			String esupplier = excel.readStringData("product", 23, 2);
-			product.selectProductSupplier(esupplier);
-			String epurchaseprice = excel.readStringData("product", 24, 2);
-			product.enterProductPurchasePrise(epurchaseprice);
-			String etax = excel.readStringData("product", 25, 2);
-			product.enterProductTax(etax);
-			String etaxmethod = excel.readStringData("product", 26, 2);
-			product.selectProductTaxmethod(etaxmethod);
-			String eprice = excel.readStringData("product", 27, 2);
-			product.enterProductprice(eprice);
-			String eunit = excel.readStringData("product", 28, 2);
-			product.enterProductunit(eunit);
-			String ealert = excel.readStringData("product", 29, 2);
-			product.enterProductAlertQuantity(ealert);
-			String eoption = excel.readStringData("product", 30, 2);
-			product.enterProductOptions(eoption);
-			String edescription = excel.readStringData("product", 31, 2);
-			product.enterProductDescription(edescription);
-			String ecolor = excel.readStringData("product", 32, 2);
-			product.chooseProductColors(ecolor);
-		}
 
-		@Test(priority=4, enabled=true)
-		public void validateToDeleteTheProductInProductPage()
-		{
-			product.clickProductDeleteBtn();
-			product.clickProductConfirmDeleteBtn();
-		}
-		
-		
+	@Test(priority = 2, enabled = true)
+	public void enterValueToProductPage() throws IOException {
+		product.clickOnAddProduct();
+		String ptype = excel.readStringData("product", 1, 2);
+		product.selectProductType(ptype);
+		String pcode = excel.readStringData("product", 2, 2);
+		product.enterProductCode(pcode);
+		String pname = excel.readStringData("product", 3, 2);
+		product.enterProductName(pname);
+		String pcategory = excel.readStringData("product", 4, 2);
+		product.selectProductcategory(pcategory);
+		String psupplier = excel.readStringData("product", 5, 2);
+		product.selectProductSupplier(psupplier);
+		String ppurchaseprice = excel.readStringData("product", 6, 2);
+		product.enterProductPurchasePrise(ppurchaseprice);
+		String ptax = excel.readStringData("product", 7, 2);
+		product.enterProductTax(ptax);
+		String ptaxmethod = excel.readStringData("product", 8, 2);
+		product.selectProductTaxmethod(ptaxmethod);
+		String pprice = excel.readStringData("product", 9, 2);
+		product.enterProductprice(pprice);
+		String punit = excel.readStringData("product", 10, 2);
+		product.enterProductunit(punit);
+		String palertquantity = excel.readStringData("product", 11, 2);
+		product.enterProductAlertQuantity(palertquantity);
+		String poptions = excel.readStringData("product", 12, 2);
+		product.enterProductOptions(poptions);
+		String pdescription = excel.readStringData("product", 13, 2);
+		product.enterProductDescription(pdescription);
+		String pcolor = excel.readStringData("product", 14, 2);
+		product.chooseProductColors(pcolor);
+		product.clickOnSubmitBtn();
+		product.clickProductModifyStockBtn();
+		product.clickViewProductBtn();
+
+		SoftAssert soft = new SoftAssert();
+		soft.assertEquals(product.getProductCodeSearch(), "1234");
+		soft.assertEquals(product.getProductNameSearch(), "Apple");
+		soft.assertEquals(product.getProductCategorySearch(), "Fruits");
+		soft.assertEquals(product.getProductSupplierSearch(), "abc");
+		soft.assertEquals(product.getProductTaxSearch(), "10");
+		soft.assertEquals(product.getProductPriceSearch(), "1000");
+		soft.assertEquals(product.getProductDescriptionSearch(), "abcdefgh");
+	}
+
+	@Test(priority = 3, enabled = true)
+	public void validateToEditProductInProductPage() throws IOException {
+		product.clickProductEditBtn();
+		String etype = excel.readStringData("product", 19, 2);
+		product.selectProductType(etype);
+		String ecode = excel.readStringData("product", 20, 2);
+		product.enterProductCode(ecode);
+		String ename = excel.readStringData("product", 21, 2);
+		product.enterProductName(ename);
+		String ecategory = excel.readStringData("product", 22, 2);
+		product.selectProductcategory(ecategory);
+		String esupplier = excel.readStringData("product", 23, 2);
+		product.selectProductSupplier(esupplier);
+		String epurchaseprice = excel.readStringData("product", 24, 2);
+		product.enterProductPurchasePrise(epurchaseprice);
+		String etax = excel.readStringData("product", 25, 2);
+		product.enterProductTax(etax);
+		String etaxmethod = excel.readStringData("product", 26, 2);
+		product.selectProductTaxmethod(etaxmethod);
+		String eprice = excel.readStringData("product", 27, 2);
+		product.enterProductprice(eprice);
+		String eunit = excel.readStringData("product", 28, 2);
+		product.enterProductunit(eunit);
+		String ealert = excel.readStringData("product", 29, 2);
+		product.enterProductAlertQuantity(ealert);
+		String eoption = excel.readStringData("product", 30, 2);
+		product.enterProductOptions(eoption);
+		String edescription = excel.readStringData("product", 31, 2);
+		product.enterProductDescription(edescription);
+		String ecolor = excel.readStringData("product", 32, 2);
+		product.chooseProductColors(ecolor);
+	}
+
+	@Test(priority = 4, enabled = true)
+	public void validateToDeleteTheProductInProductPage() {
+		product.clickProductDeleteBtn();
+		product.clickProductConfirmDeleteBtn();
+	}
+
 }

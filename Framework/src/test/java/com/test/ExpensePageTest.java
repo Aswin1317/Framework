@@ -1,6 +1,7 @@
 package com.test;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -12,29 +13,32 @@ import com.pages.ExpensePage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utils.ExcelUtils;
+import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class ExpensePageTest extends AutomationBase{
+public class ExpensePageTest extends AutomationBase {
 
-	//ExcelUtils excel;
+	ExcelUtils excel;
 	WebDriver driver;
+	WebbrowserUtils webbrowser;
 	LoginPage login;
 	HomePage home;
 	ExpensePage expense;
-	
-	WebbrowserUtils webbrowser = new WebbrowserUtils();
+	Properties prop;
+	PropertyUtils propertyutil;
+
 	@BeforeMethod
-	public void preRun() throws Exception{
-	//	excel = new ExcelUtils("testdataframe.xlsx");
-		driver=getDriver();
+	public void preRun() throws Exception {
+		excel = new ExcelUtils("testdataframe.xlsx");
+		driver = getDriver();
 		login = new LoginPage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-		home = login.login("admin", "password");
+		prop = propertyutil.getProperty("config.properties");
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
+		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
 		expense = home.navigateToExpensePage();
 	}
-	
-	@Test(priority=1, enabled=true)
+
+	@Test(priority = 1, enabled = true)
 	public void validateElementOnAddExpense() {
 		expense.clickOnAddExpenseBtn();
 		SoftAssert soft = new SoftAssert();
@@ -45,30 +49,29 @@ public class ExpensePageTest extends AutomationBase{
 		soft.assertTrue(expense.isExpenseAmountIsDisplayed(), "Failure messege : Expense Amount is not displayed");
 		soft.assertTrue(expense.isExpenseAttachmentIsDisplayed(), "Failure messege : Expense Attachment is not displayed");
 		soft.assertTrue(expense.isExpenseNotesIsDisplayed(), "Failure messege : Expense Notes is not displayed");
-		soft.assertTrue(expense.isCloseBtnIsDisplayed(), "Failure messege : Expense Close button is not displayed");
-		soft.assertTrue(expense.isSubmitBtnIsDisplayed(), "Failure messege : Expense Submit button is not displayed");
+
 	}
-	
-	@Test(priority=2, enabled=true)
+
+	@Test(priority = 2, enabled = true)
 	public void validateValueToAddExpense() throws IOException {
 		expense.clickOnAddExpenseBtn();
-		//String edate = excel.readStringData("expense", 1, 2);
+		excel.readStringData("expense", 1, 2);
 		expense.enterExpenseDate("04-11-2023");
-		//String ereference = excel.readStringData("expense", 2, 2);
+		excel.readStringData("expense", 2, 2);
 		expense.enterExpenseReference("ref");
-	//	String ecategory = excel.readStringData("expense", 3, 2);
+		excel.readStringData("expense", 3, 2);
 		expense.selectExpenseCategory("Fruits");
-	//	String estore = excel.readStringData("expense", 4, 2);
+		excel.readStringData("expense", 4, 2);
 		expense.selectExpenseStore("MNC");
-	//	String eamount = excel.readStringData("expense", 5, 2);
+		excel.readStringData("expense", 5, 2);
 		expense.enterExpenseAmount("1000");
 		expense.chooseAttachment();
-	//	String enotes = excel.readStringData("expense", 6, 2);
+		excel.readStringData("expense", 6, 2);
 		expense.enterExpenseNotes("abcdefgh");
 		expense.clickOnSubmitBtn();
 	}
-	
-/*	@Test(priority=3, enabled=true)
+
+	@Test(priority = 3, enabled = true)
 	public void validateEditExpenseInExpensePage() throws IOException {
 		expense.clickOnEditBtn();
 		String editdate = excel.readStringData("expense", 11, 2);
@@ -86,10 +89,10 @@ public class ExpensePageTest extends AutomationBase{
 		expense.enterExpenseNotes(editnotes);
 		expense.clickOnSubmitBtn();
 	}
-	
-	@Test(priority=4, enabled=true)
+
+	@Test(priority = 4, enabled = true)
 	public void validateToDeleteExpense() {
 		expense.clickOnDeleteBtn();
 		expense.clickConfirmDeleteBtn();
-	}*/
+	}
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="6" name="Suite" parallel="tests">
+	<test thread-count="6" name="Test">
+		<classes>
+			<class name="com.test.CategoryPageTest" />
+			<class name="com.test.ExpensePageTest" />
+			<class name="com.test.HomePageTest" />
+			<class name="com.test.LoginPageTest" />
+			<class name="com.test.LogoutButtonTest" />
+			<class name="com.test.PeoplePageTest" />
+			<class name="com.test.PosPageTest" />
+			<class name="com.test.ProductPageTest" />
+			<class name="com.test.StorePageTest" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -9,24 +9,20 @@ public class PropertyUtils {
 
 	public static final String currentDir = System.getProperty("user.dir");
 	public static String filePath = currentDir + "/src/main/resources/";
-	
-	public Properties getProperty(String fileName) throws IOException 
-	{
+
+	public Properties getProperty(String fileName) throws IOException {
 		FileInputStream fis = null;
 		Properties prop = null;
-		
+
 		try {
-			fis = new FileInputStream(filePath+fileName);
+			fis = new FileInputStream(filePath + fileName);
 			prop = new Properties();
 			prop.load(fis);
-		}
-		catch(FileNotFoundException fnfe) {
+		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
-		}
-		catch(IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
-		}
-		finally {
+		} finally {
 			fis.close();
 		}
 		System.out.println("url is : " + prop.getProperty("url"));
@@ -34,5 +30,5 @@ public class PropertyUtils {
 		System.out.println("password is : " + prop.getProperty("password"));
 		return prop;
 	}
-	
+
 }

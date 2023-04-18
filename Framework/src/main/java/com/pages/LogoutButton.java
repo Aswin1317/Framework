@@ -9,20 +9,20 @@ import com.utils.WebActionUtils;
 
 public class LogoutButton {
 
-WebDriver driver;
-	
+	WebDriver driver;
+
 	WebActionUtils webaction = new WebActionUtils();
-	
-	@FindBy(xpath="(//li[@class='flat-box waves-effect waves-block'])[22]")
+
+	@FindBy(xpath = "(//li[@class='flat-box waves-effect waves-block'])[22]")
 	WebElement logoutbtn;
-	
-	public LogoutButton(WebDriver  driver) {
-		this.driver=driver;
+
+	public LogoutButton(WebDriver driver) {
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void navigateToLogoutButton() {
 		webaction.clickOnTheElement(driver, logoutbtn);
 	}
-	
+
 }

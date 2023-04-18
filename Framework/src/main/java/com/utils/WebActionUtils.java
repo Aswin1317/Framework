@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 
 public class WebActionUtils {
 
-	
 	/**
 	 * this method is used to send the inputs like characters, numbers and symbols
 	 * 
 	 * @param driver
 	 * @param element
-	 * @param name 
+	 * @param name
 	 */
 	public void enterTheValue(WebDriver driver, WebElement element, String value) {
 
@@ -21,12 +20,12 @@ public class WebActionUtils {
 			element.sendKeys(value);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 	}
-	
+
 	/**
-	 * this method is used to clear the text 
+	 * this method is used to clear the text
 	 * 
 	 * @param element
 	 */
@@ -36,10 +35,10 @@ public class WebActionUtils {
 			element.clear();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 	}
-	
+
 	/**
 	 * this method is used to click checkboxes and radio buttons
 	 * 
@@ -51,12 +50,12 @@ public class WebActionUtils {
 			element.click();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 	}
-	
+
 	/**
-	 * this method is used to submit the form 
+	 * this method is used to submit the form
 	 * 
 	 * @param element
 	 */
@@ -66,10 +65,10 @@ public class WebActionUtils {
 			element.submit();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 	}
-	
+
 	/**
 	 * this method is used to verify that the element is selected
 	 * 
@@ -82,11 +81,11 @@ public class WebActionUtils {
 			flag = element.isSelected();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * this method is used to verify that the element is enabled
 	 * 
@@ -99,11 +98,11 @@ public class WebActionUtils {
 			flag = element.isEnabled();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * this method is used to verify that the element is displayed
 	 * 
@@ -116,16 +115,16 @@ public class WebActionUtils {
 			flag = element.isDisplayed();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return flag;
 	}
-	
+
 	/**
-	 * this method returns the text 
+	 * this method returns the text
 	 * 
 	 * @param element
-	 * @return 
+	 * @return
 	 */
 	public String getTheElementText(WebDriver driver, WebElement element) {
 
@@ -134,13 +133,13 @@ public class WebActionUtils {
 			text = element.getText();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return text;
 	}
-	
+
 	/**
-	 * this method is used to return the tag name 
+	 * this method is used to return the tag name
 	 * 
 	 * @param element
 	 */
@@ -151,11 +150,11 @@ public class WebActionUtils {
 			text = element.getTagName();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return text;
 	}
-	
+
 	/**
 	 * this element is used to return the value of attribute
 	 * 
@@ -168,11 +167,11 @@ public class WebActionUtils {
 			element.getAttribute(attribute);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return text;
 	}
-	
+
 	/**
 	 * this method is used to return the value of color, font style
 	 * 
@@ -185,11 +184,11 @@ public class WebActionUtils {
 			text = element.getCssValue(null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return text;
 	}
-	
+
 	/**
 	 * this method is used to return the width and height of the element
 	 * 
@@ -202,13 +201,14 @@ public class WebActionUtils {
 			size = element.getSize();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
-		return  size;
+		return size;
 	}
-	
+
 	/**
-	 * this method is used to get the location of an web element. This position is calculated by (x,y) coordinates
+	 * this method is used to get the location of an web element. This position is
+	 * calculated by (x,y) coordinates
 	 * 
 	 * @param element
 	 */
@@ -219,10 +219,9 @@ public class WebActionUtils {
 			location = element.getLocation();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println(e.getCause());	
+			System.out.println(e.getCause());
 		}
 		return location;
 	}
-
 
 }

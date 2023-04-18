@@ -1,5 +1,7 @@
 package com.test;
 
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,26 +10,30 @@ import com.base.AutomationBase;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.LogoutButton;
+import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class LogoutButtonTest extends AutomationBase{
+public class LogoutButtonTest extends AutomationBase {
 
 	WebDriver driver;
+	WebbrowserUtils webbrowser;
 	LoginPage login;
 	HomePage home;
 	LogoutButton logout;
-	
-	WebbrowserUtils webbrowser = new WebbrowserUtils();
+	Properties prop;
+	PropertyUtils propertyutil;
+
 	@BeforeMethod
 	public void preRun() throws Exception {
-		driver=getDriver();
+		driver = getDriver();
 		login = new LoginPage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
-		home = login.login("admin", "password");
+		prop = propertyutil.getProperty("config.properties");
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
+		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
 		logout = home.navigateToLogoutBtn();
 	}
-	
-	@Test(priority=1, enabled=true)
+
+	@Test(priority = 1, enabled = true)
 	public void clickOnLogoutButton() {
 		logout.navigateToLogoutButton();
 	}

@@ -11,13 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WaitUtil {
 
 	public WebDriverWait wait;
-	
+
 	public void implicitWait(WebDriver driver, int timeOut) {
-		
+
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param driver
@@ -26,18 +26,18 @@ public class WaitUtil {
 	 * @throws Exception
 	 */
 	public WebElement presenceOfElementLocated(WebDriver driver, By elementlocator) throws Exception {
-		
+
 		WebElement element;
 		try {
-				wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-				element = wait.until(ExpectedConditions.presenceOfElementLocated(elementlocator));
+			wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			element = wait.until(ExpectedConditions.presenceOfElementLocated(elementlocator));
 		} catch (Exception e) {
 			throw new Exception("");
 		}
 		return element;
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param driver
@@ -45,10 +45,10 @@ public class WaitUtil {
 	 * @param timeOut
 	 */
 	public void visibilityOf(WebDriver driver, WebElement element, int timeOut) {
-		
+
 		wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
 		wait.until(ExpectedConditions.visibilityOf(element));
-		
+
 	}
-	
+
 }
