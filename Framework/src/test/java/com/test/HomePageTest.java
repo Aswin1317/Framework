@@ -14,7 +14,7 @@ import com.pages.LoginPage;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class HomePageTest extends AutomationBase {
+public class HomePageTest extends AutomationBase  {
 
 	WebDriver driver;
 	WebbrowserUtils webbrowser;

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.utils.WebActionUtils;
 
-public class ProductPage {
+public class ProductPage  {
 
 	WebDriver driver;
 

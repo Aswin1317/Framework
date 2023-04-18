@@ -25,7 +25,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.base.AutomationBase;
 
-public class TestListeners implements ITestListener {
+public class TestListeners implements ITestListener  {
 
 	ExtentReports extent;
 	static ExtentTest test;

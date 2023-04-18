@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PropertyUtils {
+public class PropertyUtils  {
 
 	public static final String currentDir = System.getProperty("user.dir");
 	public static String filePath = currentDir + "/src/main/resources/";

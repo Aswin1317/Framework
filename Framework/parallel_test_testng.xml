@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="6" name="Suite" parallel="tests">
 	<test thread-count="6" name="Test">
-		<classes>
+	 	<classes>
 			<class name="com.test.CategoryPageTest" />
 			<class name="com.test.ExpensePageTest" />
 			<class name="com.test.HomePageTest" />

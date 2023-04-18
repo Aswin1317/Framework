@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class ActionAndJavaScriptExecutor {
+public class ActionAndJavaScriptExecutor  {
 
 	WebDriver driver;
 	JavascriptExecutor js = (JavascriptExecutor) driver;

@@ -2,7 +2,7 @@ package com.utils;
 
 import org.openqa.selenium.WebDriver;
 
-public class WebbrowserUtils {
+public class WebbrowserUtils  {
 
 	/**
 	 * this method is for launching the given url

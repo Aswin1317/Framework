@@ -5,7 +5,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class WebActionUtils {
+public class WebActionUtils  {
 
 	/**
 	 * this method is used to send the inputs like characters, numbers and symbols

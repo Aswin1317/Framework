@@ -16,7 +16,7 @@ import com.utils.ExcelUtils;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class ExpensePageTest extends AutomationBase {
+public class ExpensePageTest extends AutomationBase  {
 
 	ExcelUtils excel;
 	WebDriver driver;

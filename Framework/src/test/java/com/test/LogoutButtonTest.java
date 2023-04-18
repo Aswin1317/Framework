@@ -13,7 +13,7 @@ import com.pages.LogoutButton;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class LogoutButtonTest extends AutomationBase {
+public class LogoutButtonTest extends AutomationBase  {
 
 	WebDriver driver;
 	WebbrowserUtils webbrowser;
