@@ -16,7 +16,7 @@ import com.utils.ExcelUtils;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class StorePageTest extends AutomationBase  {
+public class StorePageTest extends AutomationBase {
 
 	ExcelUtils excel;
 	WebDriver driver;
@@ -32,10 +32,8 @@ public class StorePageTest extends AutomationBase  {
 		excel = new ExcelUtils("testdataframe.xlsx");
 		driver = getDriver();
 		login = new LoginPage(driver);
-		webbrowser.launchUrl(driver, "https://qalegend.com/restaurant/login");
 		prop = propertyutil.getProperty("config.properties");
-		webbrowser.launchUrl(driver, prop.getProperty("url"));
-		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		store = home.navigateToStoresPage();
 	}
 
@@ -50,7 +48,8 @@ public class StorePageTest extends AutomationBase  {
 		soft.assertTrue(store.isStoreCountryIsDisplayed(), "Failure messege : Store country is not displayed");
 		soft.assertTrue(store.isStoreCityIsDisplayed(), "Failure messege : Store city is not displayed");
 		soft.assertTrue(store.isStoreAddressIsDisplayed(), "Failure messege : Store address is not displayed");
-		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(), "Failure messege : Store customer footer receipt is not displayed");
+		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(),
+				"Failure messege : Store customer footer receipt is not displayed");
 
 	}
 

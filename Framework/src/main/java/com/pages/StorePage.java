@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.utils.WebActionUtils;
 import com.utils.WebElementUtils;
 
-public class StorePage  {
+public class StorePage {
 
 	WebDriver driver;
 

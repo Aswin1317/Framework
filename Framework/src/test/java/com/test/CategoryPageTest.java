@@ -15,7 +15,7 @@ import com.utils.ExcelUtils;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class CategoryPageTest extends AutomationBase  {
+public class CategoryPageTest extends AutomationBase {
 
 	ExcelUtils excel;
 	WebDriver driver;
@@ -32,8 +32,7 @@ public class CategoryPageTest extends AutomationBase  {
 		driver = getDriver();
 		login = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
-		webbrowser.launchUrl(driver, prop.getProperty("url"));
-		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		category = home.navigateToCategoryPage();
 	}
 

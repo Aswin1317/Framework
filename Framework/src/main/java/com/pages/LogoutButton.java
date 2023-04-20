@@ -21,7 +21,7 @@ public class LogoutButton {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void navigateToLogoutButton()  {
+	public void navigateToLogoutButton() {
 		webaction.clickOnTheElement(driver, logoutbtn);
 	}
 

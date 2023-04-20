@@ -48,7 +48,7 @@ public class HomePage {
 	@FindBy(xpath = "(//li[@class='flat-box waves-effect waves-block'])[22]")
 	WebElement logoutbtn;
 
-	public HomePage(WebDriver driver)  {
+	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

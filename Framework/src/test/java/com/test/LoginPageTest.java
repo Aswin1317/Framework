@@ -10,7 +10,7 @@ import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utils.PropertyUtils;
 
-public class LoginPageTest extends AutomationBase  {
+public class LoginPageTest extends AutomationBase {
 	WebDriver driver;
 	LoginPage login;
 	HomePage home;

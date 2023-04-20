@@ -26,21 +26,21 @@ public class CategoryPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public boolean isCategoryProductIsDisplayed()  {
+	public boolean isCategoryProductIsDisplayed() {
 		boolean flag = webaction.checkElementisDisplayed(driver, categoryproduct);
 		return flag;
 	}
 
-	public boolean isCategoryExpenseIsDisplayed()  {
+	public boolean isCategoryExpenseIsDisplayed() {
 		boolean flag = webaction.checkElementisDisplayed(driver, categoryexpense);
 		return flag;
 	}
 
-	public void clickOnCategoryProduct()  {
+	public void clickOnCategoryProduct() {
 		webaction.clickOnTheElement(driver, categoryproduct);
 	}
 
-	public void clickOnCategoryExpense()  {
+	public void clickOnCategoryExpense() {
 		webaction.clickOnTheElement(driver, categoryexpense);
 	}
 }

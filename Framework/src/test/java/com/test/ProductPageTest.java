@@ -16,7 +16,7 @@ import com.utils.ExcelUtils;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class ProductPageTest extends AutomationBase  {
+public class ProductPageTest extends AutomationBase {
 
 	ExcelUtils excel;
 	WebDriver driver;
@@ -29,16 +29,14 @@ public class ProductPageTest extends AutomationBase  {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
-		excel = new ExcelUtils("testdataframe.xlsx");
 		driver = getDriver();
 		login = new LoginPage(driver);
-		propertyutil = new PropertyUtils(); 
-		webbrowser = new WebbrowserUtils();
+		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
-		webbrowser.launchUrl(driver, prop.getProperty("url"));
-		login.performlogin(prop.getProperty("admin"), prop.getProperty("password"));
-		home = new HomePage(driver);
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		product = home.navigateToProductPage();
+		excel = new ExcelUtils("testdataframe.xlsx");
+
 	}
 
 	@Test(priority = 1, enabled = true)
@@ -51,15 +49,18 @@ public class ProductPageTest extends AutomationBase  {
 		soft.assertTrue(product.isNameIsDisplayed(), "Failure messege : Product name is not displayed");
 		soft.assertTrue(product.isCategoryIsDisplayed(), "Failure messege : Product category is not displayed");
 		soft.assertTrue(product.isSupplierIsDisplayed(), "Failure messege : Product supplier is not displayed");
-		soft.assertTrue(product.isPurchasePriceIsDisplayed(), "Failure messege : Product purchase price is not displayed");
+		soft.assertTrue(product.isPurchasePriceIsDisplayed(),
+				"Failure messege : Product purchase price is not displayed");
 		soft.assertTrue(product.isTaxIsDisplayed(), "Failure messege : Product tax is not displayed");
 		soft.assertTrue(product.isTaxMethodIsDisplayed(), "Failure messege : Product tax method is not displayed");
 		soft.assertTrue(product.isPriceIsDisplayed(), "Failure messege : Product price is not displayed");
 		soft.assertTrue(product.isProductUnitIsDisplayed(), "Failure messege : Product product unit is not displayed");
-		soft.assertTrue(product.isAlertQuantityIsDisplayed(), "Failure messege : Product alert quantity is not displayed");
+		soft.assertTrue(product.isAlertQuantityIsDisplayed(),
+				"Failure messege : Product alert quantity is not displayed");
 		soft.assertTrue(product.isProductOptionsIsDisplayed(), "Failure messege : Product options is not displayed");
 		soft.assertTrue(product.isInputImageIsDisplayed(), "Failure messege : Input image is not displayed");
-		soft.assertTrue(product.isProductDescriptionIsDisplayed(), "Failure messege : Product description is not displayed");
+		soft.assertTrue(product.isProductDescriptionIsDisplayed(),
+				"Failure messege : Product description is not displayed");
 		soft.assertTrue(product.isChooseColorsIsDisplayed(), "Failure messege : Choose color is not displayed");
 		soft.assertAll();
 	}

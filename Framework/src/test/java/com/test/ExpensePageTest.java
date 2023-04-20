@@ -16,7 +16,7 @@ import com.utils.ExcelUtils;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class ExpensePageTest extends AutomationBase  {
+public class ExpensePageTest extends AutomationBase {
 
 	ExcelUtils excel;
 	WebDriver driver;
@@ -33,8 +33,7 @@ public class ExpensePageTest extends AutomationBase  {
 		driver = getDriver();
 		login = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
-		webbrowser.launchUrl(driver, prop.getProperty("url"));
-		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		expense = home.navigateToExpensePage();
 	}
 
@@ -43,11 +42,13 @@ public class ExpensePageTest extends AutomationBase  {
 		expense.clickOnAddExpenseBtn();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expense.isExpenseDateIsDisplayed(), "Failure messege : Expense Date is not displayed");
-		soft.assertTrue(expense.isExpenseReferenceIsDisplayed(), "Failure messege : Expense Reference is not displayed");
+		soft.assertTrue(expense.isExpenseReferenceIsDisplayed(),
+				"Failure messege : Expense Reference is not displayed");
 		soft.assertTrue(expense.isExpenseCategoryIsDisplayed(), "Failure messege : Expense Categorty is not displayed");
 		soft.assertTrue(expense.isExpenseStoreIsDisplayed(), "Failure messege : Expense Store is not displayed");
 		soft.assertTrue(expense.isExpenseAmountIsDisplayed(), "Failure messege : Expense Amount is not displayed");
-		soft.assertTrue(expense.isExpenseAttachmentIsDisplayed(), "Failure messege : Expense Attachment is not displayed");
+		soft.assertTrue(expense.isExpenseAttachmentIsDisplayed(),
+				"Failure messege : Expense Attachment is not displayed");
 		soft.assertTrue(expense.isExpenseNotesIsDisplayed(), "Failure messege : Expense Notes is not displayed");
 
 	}

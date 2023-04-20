@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class WebElementUtils  {
+public class WebElementUtils {
 
 	/**
 	 * this method is for select the elemet by its value

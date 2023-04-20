@@ -253,11 +253,11 @@ public class PeoplePage {
 		webaction.enterTheValue(driver, supplierphone, sphone);
 	}
 
-	public void enterValueInSupplierEmail(String semail) { 
+	public void enterValueInSupplierEmail(String semail) {
 		webaction.enterTheValue(driver, supplieremail, semail);
 	}
 
-	public void clickOnWaiterSubmitBtn()  {
+	public void clickOnWaiterSubmitBtn() {
 		webaction.clickOnTheElement(driver, submitbtn);
 	}
 

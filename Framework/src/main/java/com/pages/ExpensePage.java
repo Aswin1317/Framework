@@ -54,7 +54,7 @@ public class ExpensePage {
 	@FindBy(xpath = "(//a[@class='btn btn-default'])[2]")
 	WebElement editbtn;
 
-	public ExpensePage(WebDriver driver)  {
+	public ExpensePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

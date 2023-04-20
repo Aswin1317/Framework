@@ -14,7 +14,7 @@ import com.pages.LoginPage;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class HomePageTest extends AutomationBase  {
+public class HomePageTest extends AutomationBase {
 
 	WebDriver driver;
 	WebbrowserUtils webbrowser;
@@ -27,8 +27,9 @@ public class HomePageTest extends AutomationBase  {
 	public void preRun() throws Exception {
 		driver = getDriver();
 		login = new LoginPage(driver);
+		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
-		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
 	@Test(priority = 1, enabled = true)

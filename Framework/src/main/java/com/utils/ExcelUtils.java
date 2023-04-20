@@ -7,11 +7,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelUtils  {
+public class ExcelUtils {
 
 	public static final String currentDir = System.getProperty("user.dir");
 	public static String filePath = currentDir + "/src/test/resources";
-	static String excelPath; // "testdataframe.xlsx";
+	static String excelPath; 
 
 	static XSSFWorkbook workbook;
 	static XSSFSheet sheet;

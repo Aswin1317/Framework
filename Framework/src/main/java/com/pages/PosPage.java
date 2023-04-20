@@ -25,7 +25,7 @@ public class PosPage {
 	@FindBy(xpath = "//button[text()='Submit']")
 	WebElement submitbtn;
 
-	public PosPage(WebDriver driver)  {
+	public PosPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

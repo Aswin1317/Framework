@@ -13,7 +13,7 @@ import com.pages.LogoutButton;
 import com.utils.PropertyUtils;
 import com.utils.WebbrowserUtils;
 
-public class LogoutButtonTest extends AutomationBase  {
+public class LogoutButtonTest extends AutomationBase {
 
 	WebDriver driver;
 	WebbrowserUtils webbrowser;
@@ -28,8 +28,7 @@ public class LogoutButtonTest extends AutomationBase  {
 		driver = getDriver();
 		login = new LoginPage(driver);
 		prop = propertyutil.getProperty("config.properties");
-		webbrowser.launchUrl(driver, prop.getProperty("url"));
-		home = login.login(prop.getProperty("admin"), prop.getProperty("password"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		logout = home.navigateToLogoutBtn();
 	}
 

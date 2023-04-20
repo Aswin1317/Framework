@@ -4,7 +4,7 @@
 	<test thread-count="9" name="Test" parallel="tests">
 		<parameter name="browserName" value="Chrome"></parameter>
 
-		 <classes>
+		<classes>
 			<class name="com.test.CategoryPageTest" />
 			<class name="com.test.ExpensePageTest" />
 			<class name="com.test.HomePageTest" />

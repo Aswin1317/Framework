@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -25,7 +26,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.base.AutomationBase;
 
-public class TestListeners implements ITestListener  {
+public class TestListeners implements ITestListener {
 
 	ExtentReports extent;
 	static ExtentTest test;
@@ -44,24 +45,25 @@ public class TestListeners implements ITestListener  {
 
 	}
 
-	
-	  /*public void onTestStart(ITestResult result) { try { Object currentClass =
-	  result.getInstance(); WebDriver driver = AutomationBase.getDriver();
-	  Capabilities cap = ((RemoteWebDriver) driver).getCapabilities(); //Extent
-	  Report extent.setSystemInfo("Browser", cap.getBrowserName());
-	  extent.setSystemInfo("BrowserVersion", cap.getBrowserVersion());
-	  
-	  
-	  testName = result.getMethod().getMethodName(); test =
-	  extent.createTest(testName);
-	  test.assignCategory(result.getTestClass().getRealClass().getSimpleName());
-	  
-	  System.out.println("===============================TEST CASE : " + testName +
-	  "STARTED=============================="); } catch (Exception e) {
-	  e.printStackTrace(); 
-	  } 
-	}*/
-	 
+	public void onTestStart(ITestResult result) {
+		try {
+			Object currentClass = result.getInstance();
+			WebDriver driver = AutomationBase.getDriver();
+			Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+			// Extent Report
+			extent.setSystemInfo("Browser", cap.getBrowserName());
+			extent.setSystemInfo("BrowserVersion", cap.getBrowserVersion());
+
+			testName = result.getMethod().getMethodName();
+			test = extent.createTest(testName);
+			test.assignCategory(result.getTestClass().getRealClass().getSimpleName());
+
+			System.out.println(
+					"===============================TEST CASE : " + testName + "STARTED==============================");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void onTestSuccess(ITestResult result) {
 		System.out.println("==============================================TEST CASE : " + testName
