@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PeoplePage;
@@ -29,9 +30,11 @@ public class PeoplePageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
-		excel = new ExcelUtils("testdataframe.xlsx");
+		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		people = home.navigateToPeoplePage();
@@ -40,9 +43,9 @@ public class PeoplePageTest extends AutomationBase {
 	@Test(priority = 1, enabled = true)
 	public void validateMenuIsDisplayedOnPeoplePage() {
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(people.isPeopleWaiterIsDisplayed(), "Failure messege : Waiter is not displayed");
-		soft.assertTrue(people.isPeopleCustomerIsDisplayed(), "Failure messege : Customer is not displayed");
-		soft.assertTrue(people.isPeopleSupplierIsDisplayed(), "Failure messege : Supplier is ot displayed");
+		soft.assertTrue(people.isPeopleWaiterIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isPeopleCustomerIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isPeopleSupplierIsDisplayed(), AutomationClass.elementDisplayCheck);
 	}
 
 	@Test(priority = 2, enabled = true)
@@ -50,10 +53,10 @@ public class PeoplePageTest extends AutomationBase {
 		people.clickOnWaiterPeople();
 		people.clickOnAddWaiterButton();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(people.isWaiterNameIsDisplayed(), "Failure messege : Waiter Name is not displayed");
-		soft.assertTrue(people.isWaiterPhoneIsDisplayed(), "Failure messege : Waiter Phone is not displayed");
-		soft.assertTrue(people.isWaiterEmailIsDisplayed(), "Failure messege : Waiter Email is not displayed");
-		soft.assertTrue(people.isWaiterStoreIsDisplayed(), "Failure messege : Waiter Store is not displayed");
+		soft.assertTrue(people.isWaiterNameIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isWaiterPhoneIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isWaiterEmailIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isWaiterStoreIsDisplayed(), AutomationClass.elementDisplayCheck);
 		soft.assertAll();
 	}
 
@@ -62,10 +65,10 @@ public class PeoplePageTest extends AutomationBase {
 		people.clickOnCustomerPeople();
 		people.clickOnAddCustomerButton();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(people.isCustomerNameISDisplayed(), "Failure messege : Customer name is not displayed");
-		soft.assertTrue(people.isCustomerPhoneISDisplayed(), "Failure messege : Customer Phone is not displayed");
-		soft.assertTrue(people.isCustomerEmailISDisplayed(), "Failure messege : Customer Email is not displayed");
-		soft.assertTrue(people.isCustomerDiscountISDisplayed(), "Failure messege : Customer Discount is not displayed");
+		soft.assertTrue(people.isCustomerNameISDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isCustomerPhoneISDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isCustomerEmailISDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isCustomerDiscountISDisplayed(), AutomationClass.elementDisplayCheck);
 		soft.assertAll();
 	}
 
@@ -74,9 +77,9 @@ public class PeoplePageTest extends AutomationBase {
 		people.clickOnSupplierPeople();
 		people.clickOnAddSupplierButton();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(people.isSupplierNameIsDisplayed(), "Failure messege : Supplier Name is not displayed");
-		soft.assertTrue(people.isSupplierPhoneIsDisplayed(), "Failure messege : Supplier Phone is not displayed");
-		soft.assertTrue(people.isSupplierEmailIsDisplayed(), "Failure messege : Supplier Email is not displayed");
+		soft.assertTrue(people.isSupplierNameIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isSupplierPhoneIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(people.isSupplierEmailIsDisplayed(), AutomationClass.elementDisplayCheck);
 		soft.assertAll();
 	}
 

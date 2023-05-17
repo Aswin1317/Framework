@@ -17,7 +17,7 @@ public class LoginPageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtils propertyutil;
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = true, retryAnalyzer = com.analyzer.RetryAnalyzer.class)
 	public void validateLogin() throws Exception {
 		driver = getDriver();
 		login = new LoginPage(driver);

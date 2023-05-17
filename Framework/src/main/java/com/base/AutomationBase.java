@@ -1,5 +1,6 @@
 package com.base;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -24,12 +25,20 @@ public class AutomationBase {
 
 	@BeforeTest
 	@Parameters("browserName")
-	public void preLaunch(String browserName) throws Exception {
-		launchBrowser(browserName);
+	public void preLaunch(String browserName) {
+		try {
+			launchBrowser(browserName);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		login = new LoginPage(driver);
 		webbrowser = new WebbrowserUtils();
 		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
+		try {
+			prop = propertyutil.getProperty("config.properties");
+		} catch (IOException e) {
+			throw new RuntimeException("unable to load config files");
+		}
 		webbrowser.launchUrl(driver, prop.getProperty("url"));
 	}
 
@@ -53,37 +62,25 @@ public class AutomationBase {
 		}
 	}
 
-	private void launchChromeBrowser() throws Exception {
+	private void launchChromeBrowser() {
 
-		try {
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
 	}
 
-	private void launchEdgeBrowser() throws Exception {
+	private void launchEdgeBrowser() {
 
-		try {
-			driver = new EdgeDriver();
-			driver.manage().window().maximize();
+		driver = new EdgeDriver();
+		driver.manage().window().maximize();
 
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
 	}
 
-	private void launchFirefoxBrowser() throws Exception {
+	private void launchFirefoxBrowser() {
 
-		try {
-			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
 
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
 	}
 
 	public static WebDriver getDriver() {

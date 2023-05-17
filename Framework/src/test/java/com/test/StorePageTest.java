@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.StorePage;
@@ -29,9 +30,11 @@ public class StorePageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
-		excel = new ExcelUtils("testdataframe.xlsx");
+		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		store = home.navigateToStoresPage();
@@ -41,20 +44,19 @@ public class StorePageTest extends AutomationBase {
 	public void validateMenuIsDisplayedOnStorePage() {
 		store.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(store.isAddStoreIsDisplayed(), "Failure messege : Add store is not displayed");
-		soft.assertTrue(store.isStoreNameIsDisplayed(), "Failure messege  : Store name is not displayed");
-		soft.assertTrue(store.isStoreEmailIsDisplayed(), "Failure mesege : Store email is not displayed");
-		soft.assertTrue(store.isStorePhoneIsDisplayed(), "Failure messege : Store phone number is not displayed");
-		soft.assertTrue(store.isStoreCountryIsDisplayed(), "Failure messege : Store country is not displayed");
-		soft.assertTrue(store.isStoreCityIsDisplayed(), "Failure messege : Store city is not displayed");
-		soft.assertTrue(store.isStoreAddressIsDisplayed(), "Failure messege : Store address is not displayed");
-		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(),
-				"Failure messege : Store customer footer receipt is not displayed");
+		soft.assertTrue(store.isAddStoreIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreNameIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreEmailIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStorePhoneIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreCountryIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreCityIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreAddressIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(store.isStoreCustomeFooterReceiptIsDisplayed(), AutomationClass.elementDisplayCheck);
 
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validationToEnterValueToStorePage() throws IOException {
+	public void validateValueInStorePage() throws IOException {
 		store.clickOnAddStoreButton();
 		String sname = excel.readStringData("store", 1, 2);
 		store.enterStoreName(sname);
@@ -73,8 +75,9 @@ public class StorePageTest extends AutomationBase {
 		store.clickOnSubmitButton();
 	}
 
-	@Test
-	public void validateT0EditStoreInStorePage() throws IOException {
+	@Test(priority = 3, enabled = true)
+
+	public void validateEditStoreInStorePage() throws IOException {
 		store.clickOnEditStoreButton();
 		String ename = excel.readStringData("store", 12, 2);
 		store.enterStoreName(ename);
@@ -93,7 +96,7 @@ public class StorePageTest extends AutomationBase {
 		store.clickOnSubmitButton();
 	}
 
-	public void validationToDeleteTheStoreInStorePage() {
+	public void validationForDeleteTheStoreInStorePage() {
 		store.clickOnDeleteStoreButton();
 	}
 }

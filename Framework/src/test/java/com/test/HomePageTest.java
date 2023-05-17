@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.utils.PropertyUtils;
@@ -27,6 +28,7 @@ public class HomePageTest extends AutomationBase {
 	public void preRun() throws Exception {
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
@@ -36,17 +38,16 @@ public class HomePageTest extends AutomationBase {
 	public void validateMenuIsDisplayyedOnHomePage() throws IOException {
 
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(home.isPosLinkIsDisplayed(), "Failure messege : Pos link is not displayed");
-		soft.assertTrue(home.isProductLinkIsDisplayed(), "Failure messege : Product link is not displayed");
-		soft.assertTrue(home.isStoresLinkIsDisplayed(), "Failure messege : Stores link is not displayed");
-		soft.assertTrue(home.isPeopleLinkIsDisplayed(), "Failure messege : People link is not displayed");
-		soft.assertTrue(home.isSalesLinkIsDisplayed(), "Failure messege : Sales link is not displayed");
-		soft.assertTrue(home.isExpenseLinkIsDisplayed(), "Failure messege : Expense link is not displayed");
-		soft.assertTrue(home.isCategoriesLinkIsDisplayed(), "Failure messege : Categories link is not displayed");
-		soft.assertTrue(home.isSettingLinkIsDisplayed(), "Failure messege : Setting link is not displayed");
-		soft.assertTrue(home.isReportsLinkIsDisplayed(), "Failure messege : RFeports link is not displayed");
-		home.isLanguageIsDisplayed();
-		home.isLogoutButtonIsDisplayed();
+		soft.assertTrue(home.isPosLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isProductLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isStoresLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isPeopleLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isSalesLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isExpenseLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isCategoriesLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isSettingLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+		soft.assertTrue(home.isReportsLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
+
 	}
 
 	@Test(priority = 2, enabled = true)

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.ProductPage;
@@ -29,13 +30,15 @@ public class ProductPageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
+		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		product = home.navigateToProductPage();
-		excel = new ExcelUtils("testdataframe.xlsx");
+		
 
 	}
 
@@ -43,25 +46,22 @@ public class ProductPageTest extends AutomationBase {
 	public void validateElementsOnAddProductPage() {
 		product.clickOnAddProduct();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(product.isAddProductIsDisplayed(), "Failure messege : Add product is not displayed");
-		soft.assertTrue(product.isTypeIsDisplayed(), "Failure messege : Product type is not displayed");
-		soft.assertTrue(product.isCodeIsDisplayed(), "Failure messege : Product code is not displayed");
-		soft.assertTrue(product.isNameIsDisplayed(), "Failure messege : Product name is not displayed");
-		soft.assertTrue(product.isCategoryIsDisplayed(), "Failure messege : Product category is not displayed");
-		soft.assertTrue(product.isSupplierIsDisplayed(), "Failure messege : Product supplier is not displayed");
-		soft.assertTrue(product.isPurchasePriceIsDisplayed(),
-				"Failure messege : Product purchase price is not displayed");
-		soft.assertTrue(product.isTaxIsDisplayed(), "Failure messege : Product tax is not displayed");
-		soft.assertTrue(product.isTaxMethodIsDisplayed(), "Failure messege : Product tax method is not displayed");
-		soft.assertTrue(product.isPriceIsDisplayed(), "Failure messege : Product price is not displayed");
-		soft.assertTrue(product.isProductUnitIsDisplayed(), "Failure messege : Product product unit is not displayed");
-		soft.assertTrue(product.isAlertQuantityIsDisplayed(),
-				"Failure messege : Product alert quantity is not displayed");
-		soft.assertTrue(product.isProductOptionsIsDisplayed(), "Failure messege : Product options is not displayed");
-		soft.assertTrue(product.isInputImageIsDisplayed(), "Failure messege : Input image is not displayed");
-		soft.assertTrue(product.isProductDescriptionIsDisplayed(),
-				"Failure messege : Product description is not displayed");
-		soft.assertTrue(product.isChooseColorsIsDisplayed(), "Failure messege : Choose color is not displayed");
+		soft.assertTrue(product.isAddProductIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isTypeIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isCodeIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isNameIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isCategoryIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isSupplierIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isPurchasePriceIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isTaxIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isTaxMethodIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isPriceIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isProductUnitIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isAlertQuantityIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isProductOptionsIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isInputImageIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isProductDescriptionIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(product.isChooseColorsIsDisplayed(), AutomationClass.elementDisplayCheck);
 		soft.assertAll();
 	}
 

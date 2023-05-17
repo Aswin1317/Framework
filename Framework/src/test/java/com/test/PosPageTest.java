@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.HomePage;
 import com.pages.LoginPage;
 import com.pages.PosPage;
@@ -29,13 +30,14 @@ public class PosPageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
+		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		ppage = home.navigateToPosPage();
-		excel = new ExcelUtils("testdataframe.xlsx");
 
 	}
 
@@ -43,9 +45,9 @@ public class PosPageTest extends AutomationBase {
 	public void validateMenuIsDisplayedOnPosPage() {
 		ppage.clickOnTheStore();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(ppage.isCashinHandisDisplayed(), "Failure messege : Cash in hand is not displayed");
-		soft.assertTrue(ppage.isCloseButtonIsDisplayed(), "Failure messege : Close button is not displayed");
-		soft.assertTrue(ppage.isSubmitButtonIsDisplayed(), "Failure messege : Submit button is not displayed");
+		soft.assertTrue(ppage.isCashinHandisDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(ppage.isCloseButtonIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(ppage.isSubmitButtonIsDisplayed(), AutomationClass.elementDisplayCheck);
 	}
 
 	@Test(priority = 2, enabled = true)

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.base.AutomationBase;
+import com.constants.AutomationClass;
 import com.pages.ExpensePage;
 import com.pages.HomePage;
 import com.pages.LoginPage;
@@ -29,9 +30,11 @@ public class ExpensePageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
-		excel = new ExcelUtils("testdataframe.xlsx");
+		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		expense = home.navigateToExpensePage();
@@ -41,15 +44,13 @@ public class ExpensePageTest extends AutomationBase {
 	public void validateElementOnAddExpense() {
 		expense.clickOnAddExpenseBtn();
 		SoftAssert soft = new SoftAssert();
-		soft.assertTrue(expense.isExpenseDateIsDisplayed(), "Failure messege : Expense Date is not displayed");
-		soft.assertTrue(expense.isExpenseReferenceIsDisplayed(),
-				"Failure messege : Expense Reference is not displayed");
-		soft.assertTrue(expense.isExpenseCategoryIsDisplayed(), "Failure messege : Expense Categorty is not displayed");
-		soft.assertTrue(expense.isExpenseStoreIsDisplayed(), "Failure messege : Expense Store is not displayed");
-		soft.assertTrue(expense.isExpenseAmountIsDisplayed(), "Failure messege : Expense Amount is not displayed");
-		soft.assertTrue(expense.isExpenseAttachmentIsDisplayed(),
-				"Failure messege : Expense Attachment is not displayed");
-		soft.assertTrue(expense.isExpenseNotesIsDisplayed(), "Failure messege : Expense Notes is not displayed");
+		soft.assertTrue(expense.isExpenseDateIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseReferenceIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseCategoryIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseStoreIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseAmountIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseAttachmentIsDisplayed(), AutomationClass.elementDisplayCheck);
+		soft.assertTrue(expense.isExpenseNotesIsDisplayed(), AutomationClass.elementDisplayCheck);
 
 	}
 
