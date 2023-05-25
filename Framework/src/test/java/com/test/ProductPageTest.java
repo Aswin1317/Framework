@@ -30,7 +30,6 @@ public class ProductPageTest extends AutomationBase {
 
 	@BeforeMethod
 	public void preRun() throws Exception {
-		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
 		home = new HomePage(driver);
@@ -38,7 +37,7 @@ public class ProductPageTest extends AutomationBase {
 		prop = propertyutil.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		product = home.navigateToProductPage();
-		
+		excel = new ExcelUtils();
 
 	}
 

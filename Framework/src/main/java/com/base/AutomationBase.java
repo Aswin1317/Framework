@@ -26,11 +26,8 @@ public class AutomationBase {
 	@BeforeTest
 	@Parameters("browserName")
 	public void preLaunch(String browserName) {
-		try {
-			launchBrowser(browserName);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+
+		launchBrowser(browserName);
 		login = new LoginPage(driver);
 		webbrowser = new WebbrowserUtils();
 		propertyutil = new PropertyUtils();
@@ -42,7 +39,7 @@ public class AutomationBase {
 		webbrowser.launchUrl(driver, prop.getProperty("url"));
 	}
 
-	public void launchBrowser(String browserName) throws Exception {
+	public void launchBrowser(String browserName) {
 		switch (browserName) {
 		case "chrome":
 			launchChromeBrowser();
