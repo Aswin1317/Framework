@@ -35,7 +35,7 @@ public class PeoplePageTest extends AutomationBase {
 		login = new LoginPage(driver);
 		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
+		prop = PropertyUtils.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		people = home.navigateToPeoplePage();
 	}
@@ -84,7 +84,7 @@ public class PeoplePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateToEnterValueInAddWaiter() throws IOException {
+	public void validateToEnterValueInAddWaiter()  {
 		String wname = excel.readStringData("people", 1, 2);
 		people.enterValueInWaiterName(wname);
 		String wphone = excel.readStringData("people", 2, 2);
@@ -97,7 +97,7 @@ public class PeoplePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 5, enabled = true)
-	public void validateValueInAddCustomer() throws IOException {
+	public void validateValueInAddCustomer() {
 		String cname = excel.readStringData("people", 6, 2);
 		people.enterValueInCustomerName(cname);
 		String cphone = excel.readStringData("people", 7, 2);
@@ -110,7 +110,7 @@ public class PeoplePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 7, enabled = true)
-	public void validateValueInAddSupplier() throws IOException {
+	public void validateValueInAddSupplier() {
 		String sname = excel.readStringData("people", 11, 2);
 		people.enterValueInSupplierName(sname);
 		String sphone = excel.readStringData("people", 12, 2);

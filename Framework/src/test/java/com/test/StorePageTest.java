@@ -28,20 +28,13 @@ public class StorePageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtils propertyutil;
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		excel = new ExcelUtils();
-		driver = getDriver();
-		login = new LoginPage(driver);
-		home = new HomePage(driver);
-		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
-		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
-		store = home.navigateToStoresPage();
-	}
-
 	@Test(priority = 1, enabled = true)
 	public void validateMenuIsDisplayedOnStorePage() {
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		store = home.navigateToStoresPage();
+
 		store.clickOnAddStoreButton();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(store.isAddStoreIsDisplayed(), AutomationClass.elementDisplayCheck);
@@ -56,7 +49,13 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validateValueInStorePage() throws IOException {
+	public void validateValueInStorePage() {
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		excel = new ExcelUtils();
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		store = home.navigateToStoresPage();
+
 		store.clickOnAddStoreButton();
 		String sname = excel.readStringData("store", 1, 2);
 		store.enterStoreName(sname);
@@ -77,7 +76,13 @@ public class StorePageTest extends AutomationBase {
 
 	@Test(priority = 3, enabled = true)
 
-	public void validateEditStoreInStorePage() throws IOException {
+	public void validateEditStoreInStorePage() {
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		excel = new ExcelUtils();
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		store = home.navigateToStoresPage();
+
 		store.clickOnEditStoreButton();
 		String ename = excel.readStringData("store", 12, 2);
 		store.enterStoreName(ename);
@@ -97,6 +102,11 @@ public class StorePageTest extends AutomationBase {
 	}
 
 	public void validationForDeleteTheStoreInStorePage() {
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		store = home.navigateToStoresPage();
+
 		store.clickOnDeleteStoreButton();
 	}
 }

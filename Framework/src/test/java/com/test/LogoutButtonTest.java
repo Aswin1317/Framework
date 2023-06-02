@@ -20,22 +20,16 @@ public class LogoutButtonTest extends AutomationBase {
 	LoginPage login;
 	HomePage home;
 	LogoutButton logout;
-	Properties prop;
-	PropertyUtils propertyutil;
-
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
-		login = new LoginPage(driver);
-		home = new HomePage(driver);
-		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
-		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
-		logout = home.navigateToLogoutBtn();
-	}
+	Properties prop = new Properties();
+	PropertyUtils propertyutil = new PropertyUtils();
 
 	@Test(priority = 1, enabled = true)
 	public void clickOnLogoutButton() {
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		webbrowser.launchUrl(driver, prop.getProperty("url"));
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
+
 		logout.navigateToLogoutButton();
 	}
 }

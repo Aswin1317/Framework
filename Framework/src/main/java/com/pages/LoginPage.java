@@ -38,13 +38,13 @@ public class LoginPage {
 		webaction.clickOnTheElement(driver, loginbutton);
 	}
 
-	public void performlogin(String username, String password) throws Exception {
+	public void performlogin(String username, String password)  {
 		enterValueToUserName(username);
 		enterValueToPassword(password);
 		clickOnLoginButton();
 	}
 
-	public HomePage login(String username, String password) throws Exception {
+	public HomePage login(String username, String password){
 		enterValueToUserName(username);
 		enterValueToPassword(password);
 		clickOnLoginButton();

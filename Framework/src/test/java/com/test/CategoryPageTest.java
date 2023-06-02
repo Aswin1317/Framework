@@ -28,13 +28,13 @@ public class CategoryPageTest extends AutomationBase {
 	PropertyUtils propertyutil;
 
 	@BeforeMethod
-	public void preRun() throws Exception {
+	public void preRun()  {
 		excel = new ExcelUtils();
 		driver = getDriver();
 		login = new LoginPage(driver);
 		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
+		prop = PropertyUtils.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		category = home.navigateToCategoryPage();
 	}

@@ -24,18 +24,12 @@ public class HomePageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtils propertyutil;
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
-		login = new LoginPage(driver);
-		home = new HomePage(driver);
-		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
-		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
-	}
-
 	@Test(priority = 1, enabled = true)
 	public void validateMenuIsDisplayyedOnHomePage() throws IOException {
+		propertyutil = new PropertyUtils();
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		login.login(prop.getProperty("username"), prop.getProperty("password"));
 
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(home.isPosLinkIsDisplayed(), AutomationClass.pageDisplayCheck);
@@ -52,6 +46,10 @@ public class HomePageTest extends AutomationBase {
 
 	@Test(priority = 2, enabled = true)
 	public void validateTheMenuIsClickableOnHomePage() {
+		propertyutil = new PropertyUtils();
+		login = new LoginPage(driver);
+		prop = PropertyUtils.getProperty("config.properties");
+		login.login(prop.getProperty("username"), prop.getProperty("password"));
 		home.navigateToPosLink();
 		home.navigateToProductLink();
 		home.navigateToStoresLink();

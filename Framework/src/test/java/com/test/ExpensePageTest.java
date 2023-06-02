@@ -1,10 +1,8 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -28,20 +26,14 @@ public class ExpensePageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtils propertyutil;
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		excel = new ExcelUtils();
-		driver = getDriver();
+	@Test(priority = 1, enabled = true)
+	public void validateElementOnAddExpense()  {
 		login = new LoginPage(driver);
 		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
-		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
+		prop = PropertyUtils.getProperty("config.properties");
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
 		expense = home.navigateToExpensePage();
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementOnAddExpense() {
 		expense.clickOnAddExpenseBtn();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(expense.isExpenseDateIsDisplayed(), AutomationClass.elementDisplayCheck);
@@ -55,7 +47,14 @@ public class ExpensePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void validateValueToAddExpense() throws IOException {
+	public void validateValueToAddExpense()  {
+		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
+		prop = PropertyUtils.getProperty("config.properties");
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		expense = home.navigateToExpensePage();
+		excel = new ExcelUtils();
 		expense.clickOnAddExpenseBtn();
 		excel.readStringData("expense", 1, 2);
 		expense.enterExpenseDate("04-11-2023");
@@ -74,7 +73,14 @@ public class ExpensePageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateEditExpenseInExpensePage() throws IOException {
+	public void validateEditExpenseInExpensePage() {
+		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
+		prop = PropertyUtils.getProperty("config.properties");
+		home = login.login(prop.getProperty("username"), prop.getProperty("password"));
+		expense = home.navigateToExpensePage();
+		excel = new ExcelUtils();
 		expense.clickOnEditBtn();
 		String editdate = excel.readStringData("expense", 11, 2);
 		expense.enterExpenseDate(editdate);

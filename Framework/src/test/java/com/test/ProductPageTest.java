@@ -1,10 +1,8 @@
 package com.test;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -28,21 +26,15 @@ public class ProductPageTest extends AutomationBase {
 	Properties prop;
 	PropertyUtils propertyutil;
 
-	@BeforeMethod
-	public void preRun() throws Exception {
-		driver = getDriver();
+	@Test(priority = 1, enabled = true)
+	public void validateElementsOnAddProductPage() {
 		login = new LoginPage(driver);
 		home = new HomePage(driver);
 		propertyutil = new PropertyUtils();
-		prop = propertyutil.getProperty("config.properties");
+		prop = PropertyUtils.getProperty("config.properties");
 		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
 		product = home.navigateToProductPage();
-		excel = new ExcelUtils();
 
-	}
-
-	@Test(priority = 1, enabled = true)
-	public void validateElementsOnAddProductPage() {
 		product.clickOnAddProduct();
 		SoftAssert soft = new SoftAssert();
 		soft.assertTrue(product.isAddProductIsDisplayed(), AutomationClass.elementDisplayCheck);
@@ -65,7 +57,14 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public void enterValueToProductPage() throws IOException {
+	public void enterValueToProductPage() {
+		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
+		prop = PropertyUtils.getProperty("config.properties");
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
+		product = home.navigateToProductPage();
+		excel = new ExcelUtils();
 		product.clickOnAddProduct();
 		String ptype = excel.readStringData("product", 1, 2);
 		product.selectProductType(ptype);
@@ -110,7 +109,14 @@ public class ProductPageTest extends AutomationBase {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public void validateToEditProductInProductPage() throws IOException {
+	public void validateToEditProductInProductPage() {
+		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
+		prop = PropertyUtils.getProperty("config.properties");
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
+		product = home.navigateToProductPage();
+		excel = new ExcelUtils();
 		product.clickProductEditBtn();
 		String etype = excel.readStringData("product", 19, 2);
 		product.selectProductType(etype);
@@ -144,8 +150,14 @@ public class ProductPageTest extends AutomationBase {
 
 	@Test(priority = 4, enabled = true)
 	public void validateToDeleteTheProductInProductPage() {
+		login = new LoginPage(driver);
+		home = new HomePage(driver);
+		propertyutil = new PropertyUtils();
+		prop = PropertyUtils.getProperty("config.properties");
+		login.performlogin(prop.getProperty("username"), prop.getProperty("password"));
+		product = home.navigateToProductPage();
 		product.clickProductDeleteBtn();
 		product.clickProductConfirmDeleteBtn();
-	}
 
+	}
 }

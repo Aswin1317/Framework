@@ -10,7 +10,7 @@ public class PropertyUtils {
 	public static final String currentDir = System.getProperty("user.dir");
 	public static String filePath = currentDir + "/src/main/resources/";
 
-	public Properties getProperty(String fileName) throws IOException {
+	public static Properties getProperty(String fileName) {
 		FileInputStream fis = null;
 		Properties prop = null;
 
@@ -19,11 +19,17 @@ public class PropertyUtils {
 			prop = new Properties();
 			prop.load(fis);
 		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
+			throw new RuntimeException("File Not Found");
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			throw new RuntimeException("File Not Found");
 		} finally {
-			fis.close();
+			try {
+				fis.close();
+			} catch (IOException e) {
+
+				throw new RuntimeException("Error While Closing File");
+
+			}
 		}
 		System.out.println("url is : " + prop.getProperty("url"));
 		System.out.println("username is : " + prop.getProperty("username"));

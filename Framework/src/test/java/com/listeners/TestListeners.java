@@ -32,7 +32,8 @@ public class TestListeners implements ITestListener {
 	static ExtentTest test;
 	String testName;
 	String reportPath = System.getProperty("user.dir") + "/Reports/";
-
+	AutomationBase base = new AutomationBase();
+	
 	public void onStart(ITestContext context) {
 		ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
 		extent = new ExtentReports();
@@ -48,9 +49,8 @@ public class TestListeners implements ITestListener {
 	public void onTestStart(ITestResult result) {
 		try {
 			Object currentClass = result.getInstance();
-			WebDriver driver = AutomationBase.getDriver();
+			WebDriver driver = base.getDriver();
 			Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-			// Extent Report
 			extent.setSystemInfo("Browser", cap.getBrowserName());
 			extent.setSystemInfo("BrowserVersion", cap.getBrowserVersion());
 
